@@ -2,9 +2,16 @@
 
 namespace SeleniumCSharpNetCore.Pages
 {
-    public class HomePage:DriverHelper
+    public class HomePage
     {
-        IWebElement signIn => Driver.FindElement(By.XPath("//a[normalize-space()='Sign in']"));
+        private IWebDriver _driver;
+
+        public HomePage(IWebDriver driver)
+        {
+            this._driver = driver;
+        }
+
+        IWebElement signIn => _driver.FindElement(By.XPath("//a[normalize-space()='Sign in']"));
 
         public void ClickSignIn() => signIn.Click();
     }
