@@ -10,8 +10,7 @@ namespace SeleniumCSharpNetCore.Pages
         {
             this._driver = driver;
         }
-
-        IWebElement signIn => _driver.FindElement(By.XPath("//a[normalize-space()='Sign in']"));
+        IWebElement signIn => _driver.FindElement(By.LinkText("Sign in"));
 
         public void ClickSignIn() => signIn.Click();
     }

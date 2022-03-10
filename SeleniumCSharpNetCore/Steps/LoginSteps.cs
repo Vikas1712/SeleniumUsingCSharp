@@ -5,7 +5,7 @@ using TechTalk.SpecFlow.Assist;
 namespace SeleniumCSharpNetCore.Steps
 {
     [Binding]
-    public sealed class LoginSteps : DriverHelper
+    public sealed class LoginSteps
     {
         private DriverHelper _driverHelper;
         HomePage homePage;
