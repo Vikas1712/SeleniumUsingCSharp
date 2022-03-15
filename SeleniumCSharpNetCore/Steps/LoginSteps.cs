@@ -5,16 +5,23 @@ using TechTalk.SpecFlow.Assist;
 namespace SeleniumCSharpNetCore.Steps
 {
     [Binding]
-    public sealed class LoginSteps : DriverHelper
+    public sealed class LoginSteps
     {
-        HomePage homePage = new HomePage();
-        LoginPage loginPage = new LoginPage();
+        private DriverHelper _driverHelper;
+        HomePage homePage;
+        LoginPage loginPage;
+
+        public LoginSteps(DriverHelper driverHelper)
+        {
+            _driverHelper = driverHelper;
+            homePage = new HomePage(_driverHelper.Driver);
+            loginPage = new LoginPage(_driverHelper.Driver);
+        }
 
         [Given(@"I navigate to application")]
         public void GivenINavigateToApplication()
         {
-            Driver.Navigate().GoToUrl("http://automationpractice.com");
-            Driver.Manage().Window.Maximize();
+            _driverHelper.Driver.Navigate().GoToUrl("http://automationpractice.com");
         }
         
         [Given(@"I click the SignIn link")]

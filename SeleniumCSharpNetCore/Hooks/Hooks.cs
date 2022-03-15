@@ -8,9 +8,13 @@ using WebDriverManager.DriverConfigs.Impl;
 namespace SeleniumCSharpNetCore.Hooks
 {
     [Binding]
-    public sealed class Hooks:  DriverHelper
+    public class Hooks
     {
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
+
+        private DriverHelper _driverHelper;
+
+        public Hooks(DriverHelper driverHelper) => _driverHelper = driverHelper;
 
         [BeforeScenario]
         public void BeforeScenario()
@@ -20,13 +24,13 @@ namespace SeleniumCSharpNetCore.Hooks
             option.AddArguments("--disable-gpu");
             new DriverManager().SetUpDriver(new ChromeConfig());
             Console.WriteLine("Setup");
-            Driver = new ChromeDriver(option);
+            _driverHelper.Driver = new ChromeDriver(option);
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-            Driver.Quit();
+            _driverHelper.Driver.Quit();
         }
     }
 }
