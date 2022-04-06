@@ -1,4 +1,7 @@
-﻿using SeleniumCSharpNetCore.Pages;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Gherkin.Model;
+using AventStack.ExtentReports.Reporter;
+using SeleniumCSharpNetCore.Pages;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -7,10 +10,9 @@ namespace SeleniumCSharpNetCore.Steps
     [Binding]
     public sealed class LoginSteps
     {
-        private DriverHelper _driverHelper;
-        HomePage homePage;
-        LoginPage loginPage;
-
+        private readonly DriverHelper _driverHelper;
+        private readonly HomePage homePage;
+        private readonly LoginPage loginPage;
         public LoginSteps(DriverHelper driverHelper)
         {
             _driverHelper = driverHelper;

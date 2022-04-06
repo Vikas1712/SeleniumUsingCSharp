@@ -4,14 +4,14 @@ namespace SeleniumCSharpNetCore.Pages
 {
     public class HomePage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public HomePage(IWebDriver driver)
         {
             this._driver = driver;
         }
-        IWebElement signIn => _driver.FindElement(By.LinkText("Sign in"));
+        IWebElement SignIn => _driver.FindElement(By.LinkText("Sign in"));
 
-        public void ClickSignIn() => signIn.Click();
+        public void ClickSignIn() => SignIn.Click();
     }
 }

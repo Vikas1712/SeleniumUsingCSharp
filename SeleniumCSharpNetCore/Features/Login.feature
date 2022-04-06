@@ -10,3 +10,8 @@ Scenario: Login Application
 		| dnsvikas.wins@gmail.com    | Password |
 	And I click SignIn Button
 	Then I should see user logged in to the application
+	And The Cart page is displayed
+	Then The element should be visible on page
+	| element           | location |
+	| CartAddressHeader | CartPage |
+	Then The element CheckoutButton on CartPage is clicked
