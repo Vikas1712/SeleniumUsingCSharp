@@ -110,7 +110,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 11
  testRunner.And("I click SignIn Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 12
+#line 13
  testRunner.Then("I should see user logged in to the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

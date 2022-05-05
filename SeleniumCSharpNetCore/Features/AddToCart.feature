@@ -9,6 +9,7 @@ Scenario: Add two numbers
 		| UserName					 | Password |
 		| dnsvikas.wins@gmail.com    | Password |
 	And I click SignIn Button
+	#And I navigate to application
 	Then I should see user logged in to the application
 
 	

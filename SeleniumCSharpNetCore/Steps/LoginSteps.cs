@@ -36,7 +36,8 @@ namespace SeleniumCSharpNetCore.Steps
         public void GivenIEnterUsernameAndPassword(Table table)
         {
             dynamic data = table.CreateDynamicInstance();
-            loginPage.EnterUserNameAndPassword(data.UserName,data.Password);
+            //loginPage.EnterUserNameAndPassword(data.UserName,data.Password);
+            loginPage.ClickSignIn();
         }
         
         [Given(@"I click SignIn Button")]
