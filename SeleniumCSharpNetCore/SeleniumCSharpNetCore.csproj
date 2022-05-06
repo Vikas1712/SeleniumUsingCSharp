@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Feature\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <SpecFlowFeatureFiles Update="Feature\Login.feature">
       <Generator Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'"></Generator>
     </SpecFlowFeatureFiles>
