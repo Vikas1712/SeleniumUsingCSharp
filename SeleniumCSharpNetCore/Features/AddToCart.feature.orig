@@ -3,7 +3,11 @@
 
 
 @mytag
+<<<<<<< HEAD:SeleniumCSharpNetCore/Features/AddToCart.feature
+Scenario: Add two numbers
+=======
 Scenario: Validate login functionality for exisitng user
+>>>>>>> old-origin/master:SeleniumCSharpNetCore/Feature/Login.feature
 	Given I navigate to application
 	And I click the SignIn link
 	And I enter username and password
@@ -13,7 +17,11 @@ Scenario: Validate login functionality for exisitng user
 	#And I navigate to application
 	Then I should see user logged in to the application
 
+<<<<<<< HEAD:SeleniumCSharpNetCore/Features/AddToCart.feature
+	
+=======
 Scenario: Validate User creation for automationPractice site
 	Given I am on automation practice site
 	When I create a new account
 	Then the account for the user is created
+>>>>>>> old-origin/master:SeleniumCSharpNetCore/Feature/Login.feature
