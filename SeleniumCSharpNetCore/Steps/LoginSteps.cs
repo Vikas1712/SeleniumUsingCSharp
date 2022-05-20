@@ -25,7 +25,8 @@ namespace SeleniumCSharpNetCore.Steps
         {
             _driverHelper.Driver.Navigate().GoToUrl("http://automationpractice.com");
         }
-        
+
+
         [Given(@"I click the SignIn link")]
         public void GivenIClickTheSignInLink()
         {
@@ -50,6 +51,12 @@ namespace SeleniumCSharpNetCore.Steps
         public void ThenIShouldSeeUserLoggedInToTheApplication()
         {
             loginPage.ClickSignIn();
+        }
+
+        [Given(@"I am on automation practice site")]
+        public void GivenIAmOnAutomationPracticeSite()
+        {
+            _driverHelper.Driver.Navigate().GoToUrl("http://automationpractice.com");
         }
     }
 }
