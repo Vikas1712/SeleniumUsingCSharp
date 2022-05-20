@@ -1,4 +1,7 @@
-﻿using SeleniumCSharpNetCore.Pages;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Gherkin.Model;
+using AventStack.ExtentReports.Reporter;
+using SeleniumCSharpNetCore.Pages;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -7,10 +10,9 @@ namespace SeleniumCSharpNetCore.Steps
     [Binding]
     public sealed class LoginSteps
     {
-        private DriverHelper _driverHelper;
-        HomePage homePage;
-        LoginPage loginPage;
-
+        private readonly DriverHelper _driverHelper;
+        private readonly HomePage homePage;
+        private readonly LoginPage loginPage;
         public LoginSteps(DriverHelper driverHelper)
         {
             _driverHelper = driverHelper;
@@ -23,7 +25,8 @@ namespace SeleniumCSharpNetCore.Steps
         {
             _driverHelper.Driver.Navigate().GoToUrl("http://automationpractice.com");
         }
-        
+
+
         [Given(@"I click the SignIn link")]
         public void GivenIClickTheSignInLink()
         {
@@ -34,7 +37,8 @@ namespace SeleniumCSharpNetCore.Steps
         public void GivenIEnterUsernameAndPassword(Table table)
         {
             dynamic data = table.CreateDynamicInstance();
-            loginPage.EnterUserNameAndPassword(data.UserName,data.Password);
+            //loginPage.EnterUserNameAndPassword(data.UserName,data.Password);
+            loginPage.ClickSignIn();
         }
         
         [Given(@"I click SignIn Button")]
@@ -47,6 +51,12 @@ namespace SeleniumCSharpNetCore.Steps
         public void ThenIShouldSeeUserLoggedInToTheApplication()
         {
             loginPage.ClickSignIn();
+        }
+
+        [Given(@"I am on automation practice site")]
+        public void GivenIAmOnAutomationPracticeSite()
+        {
+            _driverHelper.Driver.Navigate().GoToUrl("http://automationpractice.com");
         }
     }
 }

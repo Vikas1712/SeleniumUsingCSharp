@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Update="Features\AddToCart.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -36,6 +37,9 @@
       <LastGenOutput>AddToCart.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Features\Login.feature">
+=======
+    <SpecFlowFeatureFiles Update="Feature\Login.feature">
+>>>>>>> old-origin/master
       <Generator Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'"></Generator>
     </SpecFlowFeatureFiles>
   </ItemGroup>

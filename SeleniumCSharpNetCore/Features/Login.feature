@@ -1,9 +1,8 @@
 ﻿Feature: Login
 	Check if login functionality works
 
-
 @mytag
-Scenario: Validate login functionality for exisitng user
+Scenario: Login Application
 	Given I navigate to application
 	And I click the SignIn link
 	And I enter username and password
@@ -11,8 +10,8 @@ Scenario: Validate login functionality for exisitng user
 		| dnsvikas.wins@gmail.com    | Password |
 	And I click SignIn Button
 	Then I should see user logged in to the application
-
-Scenario: Validate User creation for automationPractice site
-	Given I am on automation practice site
-	When I create a new account
-	Then the account for the user is created
+	And The Cart page is displayed
+	Then The element should be visible on page
+	| element           | location |
+	| CartAddressHeader | CartPage |
+	Then The element CheckoutButton on CartPage is clicked
