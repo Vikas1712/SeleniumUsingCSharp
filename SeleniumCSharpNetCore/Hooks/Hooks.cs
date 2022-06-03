@@ -4,6 +4,7 @@ using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium.Chrome;
 using SeleniumCSharpNetCore.Pages;
 using System;
+using System.IO;
 using TechTalk.SpecFlow;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
@@ -17,6 +18,12 @@ namespace SeleniumCSharpNetCore.Hooks
         private readonly FeatureContext _featureContext;
         private readonly ScenarioContext _scenarioContext;
         private ExtentTest _currentScenarioName;
+        private static ExtentTest _featureName;
+        private static AventStack.ExtentReports.ExtentReports extent;
+
+        static string reportPath = System.IO.Directory.GetParent(@"../../../").FullName
+            + Path.DirectorySeparatorChar + "Result"
+            + Path.DirectorySeparatorChar + "Result_" + DateTime.Now.ToString("ddMMyyyy HHmmss");
 
         public Hooks(DriverHelper driverHelper,FeatureContext featureContext, ScenarioContext scenarioContext)
         {
@@ -25,12 +32,36 @@ namespace SeleniumCSharpNetCore.Hooks
             _scenarioContext = scenarioContext;
         }
 
-        private static ExtentTest featureName;
-        private static ExtentReports extent;
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            var type = _scenarioContext.ScenarioExecutionStatus.ToString();
+            if(type == "UndefinedStep")
+            {
+                _currentScenarioName.Skip(_scenarioContext.ScenarioExecutionStatus.ToString());
+            }
+            _driverHelper.Driver.Quit();
+        }
+
+        [BeforeTestRun]
+        public static void InitializeReport()
+        {
+            var htmlReporter = new ExtentHtmlReporter(reportPath);
+            htmlReporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
+            //Attach report to reporter
+            extent = new AventStack.ExtentReports.ExtentReports();
+            extent.AttachReporter(htmlReporter);
+        }
+
+        [BeforeFeature]
+        public static void BeforeFeature(FeatureContext featureContext)
+        {
+            _featureName = extent.CreateTest<AventStack.ExtentReports.Gherkin.Model.Feature>(featureContext.FeatureInfo.Title);
+        }
 
         [BeforeScenario]
         public void BeforeScenario()
-        {   
+        {
             ChromeOptions option = new ChromeOptions();
             option.AddArguments("start-maximized");
             option.AddArguments("--disable-gpu");
@@ -38,19 +69,9 @@ namespace SeleniumCSharpNetCore.Hooks
             Console.WriteLine("Setup");
             _driverHelper.Driver = new ChromeDriver(option);
 
-            //Get feature Name
-            featureName = extent.CreateTest<Feature>(_featureContext.FeatureInfo.Title);
-            //Create dynamic scenario name
-            _currentScenarioName = featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
+            _currentScenarioName = _featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
 
         }
-
-        [AfterScenario]
-        public void AfterScenario()
-        {
-            _driverHelper.Driver.Quit();
-        }
-
 
         [AfterStep]
         public void InsertReportingStep()
@@ -70,33 +91,14 @@ namespace SeleniumCSharpNetCore.Hooks
             }
             else if (_scenarioContext.TestError != null)
             {
+                var mediaEntity = _driverHelper.CaptureScreenShot(_scenarioContext.ScenarioInfo.Title.Trim());
                 if (stepType == "Given")
-                    _currentScenarioName.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.InnerException);
+                    _currentScenarioName.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
                 else if (stepType == "When")
-                    _currentScenarioName.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.InnerException);
+                    _currentScenarioName.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
                 else if (stepType == "Then")
-                    _currentScenarioName.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message);
+                    _currentScenarioName.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
             }
-            else if (_scenarioContext.ScenarioExecutionStatus.ToString() == "StepDefinitionPending")
-            {
-                if (stepType == "Given")
-                    _currentScenarioName.CreateNode<Given>(ScenarioStepContext.Current.StepInfo.Text).Skip("Step Definition Pending");
-                else if (stepType == "When")
-                    _currentScenarioName.CreateNode<When>(ScenarioStepContext.Current.StepInfo.Text).Skip("Step Definition Pending");
-                else if (stepType == "Then")
-                    _currentScenarioName.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text).Skip("Step Definition Pending");
-            }
-        }
-
-
-        [BeforeTestRun]
-        public static void InitializeReport()
-        {
-            var htmlReporter = new ExtentHtmlReporter(@"C:\Vikas\workspace\GitLab-Vikas\SeleniumCSharpNetCore\Reports\ExtentReport.html");
-            htmlReporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
-            //Attach report to reporter
-            extent = new ExtentReports();
-            extent.AttachReporter(htmlReporter);
         }
 
         [AfterTestRun]

@@ -23,5 +23,12 @@ namespace SeleniumCSharpNetCore.Pages
         {
             BtnSubmitLogin.Click();
         }
+
+        public void OpenAutomationPracticeSite()
+        {
+            string url = "http://automationpractice.com";
+            _driver.Navigate().GoToUrl(url);
+            _driver.Manage().Window.Maximize();
+        }
     }
 }

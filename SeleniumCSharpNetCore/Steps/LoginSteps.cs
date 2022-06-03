@@ -23,7 +23,7 @@ namespace SeleniumCSharpNetCore.Steps
         [Given(@"I navigate to application")]
         public void GivenINavigateToApplication()
         {
-            _driverHelper.Driver.Navigate().GoToUrl("http://automationpractice.com");
+            loginPage.OpenAutomationPracticeSite();
         }
 
 
