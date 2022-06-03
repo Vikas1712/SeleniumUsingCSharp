@@ -1,4 +1,5 @@
-﻿using SeleniumCSharpNetCore.Pages;
+﻿using NUnit.Framework;
+using SeleniumCSharpNetCore.Pages;
 using System;
 using TechTalk.SpecFlow;
 
@@ -10,6 +11,9 @@ namespace SeleniumCSharpNetCore.Steps
         private DriverHelper _driverHelper;
         LoginPage loginPage;
         ProductPage productPage;
+        private int beforeCount;
+        private int afterCount;
+
 
         public ProductsSteps(DriverHelper driverHelper)
         {
@@ -27,31 +31,35 @@ namespace SeleniumCSharpNetCore.Steps
         [Given(@"User have selected a category on the website")]
         public void GivenUserHaveSelectedACategoryOnTheWebsite()
         {
-            ScenarioContext.Current.Pending();
+            loginPage.OpenAutomationPracticeSite();
+            productPage.SelectProductCategory();
         }
         
         [When(@"User selects a product from the list")]
         public void WhenUserSelectsAProductFromTheList()
         {
             productPage.SelectProductCategory();
+            productPage.SelectProduct();
         }
         
         [When(@"User applys filter to the products")]
         public void WhenUserApplysFilterToTheProducts()
         {
-            ScenarioContext.Current.Pending();
+            beforeCount= productPage.CountNumberOfProducts();
+            productPage.SetFilterBasedOnCategory();
+            afterCount = productPage.CountNumberOfProducts();
         }
         
         [Then(@"All the details related to products are visible")]
         public void ThenAllTheDetailsRelatedToProductsAreVisible()
         {
-            ScenarioContext.Current.Pending();
+            productPage.ViewProductDetail();
         }
         
         [Then(@"The page is updated with correct products")]
         public void ThenThePageIsUpdatedWithCorrectProducts()
         {
-            ScenarioContext.Current.Pending();
+            Assert.AreNotEqual(beforeCount, afterCount);
         }
     }
 }
