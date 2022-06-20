@@ -9,7 +9,7 @@ namespace SeleniumCSharpNetCore.Pages
 	public class WaitActionPage
 	{
 		private IWebDriver _driver;
-		private const int DefaultWait = 30;
+		private const int DefaultWait = 60;
 
 		public WaitActionPage(IWebDriver webDriver)
 		{

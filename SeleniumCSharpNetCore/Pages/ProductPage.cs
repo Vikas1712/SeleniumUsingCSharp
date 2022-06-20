@@ -1,8 +1,5 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace SeleniumCSharpNetCore.Pages
@@ -54,6 +51,14 @@ namespace SeleniumCSharpNetCore.Pages
             _waitActions.WaitForElementClickable(checkBoxProductCategory);
             _waitActions.ClickElement(checkBoxProductCategory);
             Thread.Sleep(5000);
+        }
+        
+        public void ClickAddToCart()
+        {
+            _waitActions.SwitchToIFrame();
+            _waitActions.WaitForElementClickable(btnAddToCart);
+            _waitActions.ClickElement(btnAddToCart);
+            _driver.SwitchTo().DefaultContent();
         }
     }
 }

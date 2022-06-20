@@ -1,6 +1,4 @@
-﻿using AventStack.ExtentReports;
-using AventStack.ExtentReports.Gherkin.Model;
-using AventStack.ExtentReports.Reporter;
+﻿using AventStack.ExtentReports.Gherkin.Model;
 using SeleniumCSharpNetCore.Pages;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -23,7 +21,7 @@ namespace SeleniumCSharpNetCore.Steps
         [Given(@"I navigate to application")]
         public void GivenINavigateToApplication()
         {
-            loginPage.OpenAutomationPracticeSite();
+            homePage.OpenAutomationPracticeSite();
         }
 
 
@@ -38,19 +36,19 @@ namespace SeleniumCSharpNetCore.Steps
         {
             dynamic data = table.CreateDynamicInstance();
             //loginPage.EnterUserNameAndPassword(data.UserName,data.Password);
-            loginPage.ClickSignIn();
+            loginPage.ClickSubmitLogin();
         }
         
         [Given(@"I click SignIn Button")]
         public void GivenIClickSignInButton()
         {
-            loginPage.ClickSignIn();
+            loginPage.ClickSubmitLogin();
         }
         
         [Then(@"I should see user logged in to the application")]
         public void ThenIShouldSeeUserLoggedInToTheApplication()
         {
-            loginPage.ClickSignIn();
+            loginPage.ClickSubmitLogin();
         }
 
         [Given(@"I am on automation practice site")]
