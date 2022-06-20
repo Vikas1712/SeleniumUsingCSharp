@@ -19,12 +19,25 @@ namespace SeleniumCSharpNetCore.Pages
         private readonly By txtShoppingHeader = By.CssSelector("#summary_products_quantity");
         private readonly By btnRemoveCartDelete = By.CssSelector("td[class='cart_delete text-center'] div");
         private readonly By txtCartIsEmpty = By.CssSelector(".alert.alert-warning");
+        private readonly By btnSummaryProceedToCheckout = By.CssSelector("a[class='button btn btn-default standard-checkout button-medium'] span");
+        private readonly By btnAddressProceedToCheckout = By.CssSelector("button[name = 'processAddress'] span");
         
         public void SelectProceedToCheckout()
         {
             _waitActions.WaitForElementClickable(btnProceedToCheckout);
             _waitActions.ClickElement(btnProceedToCheckout);
         }
+        public void SelectSummaryProceedToCheckout()
+        {
+            _waitActions.WaitForElementClickable(btnSummaryProceedToCheckout);
+            _waitActions.ClickElement(btnSummaryProceedToCheckout);
+        }
+        public void SelectAddressProceedToCheckout()
+        {
+            _waitActions.WaitForElementClickable(btnAddressProceedToCheckout);
+            _waitActions.ClickElement(btnAddressProceedToCheckout);
+        }
+
 
         public void SelectContinueToShopping()
         {
