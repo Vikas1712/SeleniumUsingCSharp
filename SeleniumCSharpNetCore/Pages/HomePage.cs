@@ -5,13 +5,25 @@ namespace SeleniumCSharpNetCore.Pages
     public class HomePage
     {
         private readonly IWebDriver _driver;
-
+        private WaitActionPage _waitActions;
         public HomePage(IWebDriver driver)
         {
             this._driver = driver;
+            _waitActions = new WaitActionPage(driver);
         }
-        IWebElement SignIn => _driver.FindElement(By.LinkText("Sign in"));
 
-        public void ClickSignIn() => SignIn.Click();
+        private readonly By linkSignIn = By.CssSelector("a[title='Log in to your customer account']");
+
+        public void ClickSignIn()
+        {
+            _waitActions.WaitForElementClickable(linkSignIn);
+            _waitActions.ClickElement(linkSignIn);
+        }
+        public void OpenAutomationPracticeSite()
+        {
+            string url = "http://automationpractice.com";
+            _driver.Navigate().GoToUrl(url);
+            _driver.Manage().Window.Maximize();
+        }
     }
 }

@@ -3,11 +3,11 @@
 
 @mytag
 Scenario: Validate the product is added to the cart
-	Given User is on the product page
+	Given Register User is on the product page
 	When User adds a product to the cart
 	Then The cart should be updated
 
 Scenario: Validate the cart is updated when products are removed
 	Given User have added few products in the cart
 	When User removes a product from the cart
-	Then The cart should be updated with correct products
+	Then The cart should be empty

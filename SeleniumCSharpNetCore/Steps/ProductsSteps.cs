@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using SeleniumCSharpNetCore.Pages;
-using System;
 using TechTalk.SpecFlow;
 
 namespace SeleniumCSharpNetCore.Steps
@@ -9,6 +8,7 @@ namespace SeleniumCSharpNetCore.Steps
     public class ProductsSteps
     {
         private DriverHelper _driverHelper;
+        HomePage homePage;
         LoginPage loginPage;
         ProductPage productPage;
         private int beforeCount;
@@ -19,19 +19,20 @@ namespace SeleniumCSharpNetCore.Steps
         {
             _driverHelper = driverHelper;
             loginPage = new LoginPage(_driverHelper.Driver);
+            homePage = new HomePage(_driverHelper.Driver); 
             productPage = new ProductPage(_driverHelper.Driver);
         }
 
         [Given(@"User is on automation practice site")]
         public void GivenUserIsOnAutomationPracticeSite()
         {
-            loginPage.OpenAutomationPracticeSite();
+            homePage.OpenAutomationPracticeSite();
         }
         
         [Given(@"User have selected a category on the website")]
         public void GivenUserHaveSelectedACategoryOnTheWebsite()
         {
-            loginPage.OpenAutomationPracticeSite();
+            homePage.OpenAutomationPracticeSite();
             productPage.SelectProductCategory();
         }
         

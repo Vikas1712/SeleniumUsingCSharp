@@ -5,30 +5,32 @@ namespace SeleniumCSharpNetCore.Pages
     public class LoginPage
     {
         private readonly IWebDriver _driver;
+        private WaitActionPage _waitActions;
         public LoginPage(IWebDriver driver)
         {
             this._driver = driver;
+            _waitActions = new WaitActionPage(driver);
         }
-        IWebElement TxtEmailAddress => _driver.FindElement(By.CssSelector("#email"));
-        IWebElement TxtPassword => _driver.FindElement(By.CssSelector("#passwd"));
-        IWebElement BtnSubmitLogin => _driver.FindElement(By.CssSelector("#page"));
 
+        private readonly By txtEmailAddress = By.CssSelector("#email");
+        private readonly By txtPassword = By.CssSelector("#passwd");
+        private readonly By btnSubmitLogin = By.CssSelector("#SubmitLogin");
         public void EnterUserNameAndPassword(string username, string password)
         {
-            TxtEmailAddress.SendKeys(username);
-            TxtPassword.SendKeys(password);
+            _driver.FindElement(txtEmailAddress).SendKeys(username);
+            _driver.FindElement(txtPassword).SendKeys(password);
         }
         
-        public void ClickSignIn()
+        public void ClickSubmitLogin()
         {
-            BtnSubmitLogin.Click();
+            _waitActions.WaitForElementClickable(btnSubmitLogin);
+            _waitActions.ClickElement(btnSubmitLogin);
         }
 
-        public void OpenAutomationPracticeSite()
+        public void registerUserNameAndPassword()
         {
-            string url = "http://automationpractice.com";
-            _driver.Navigate().GoToUrl(url);
-            _driver.Manage().Window.Maximize();
+            _driver.FindElement(txtEmailAddress).SendKeys("dnsvikas.wins@gmail.com");
+            _driver.FindElement(txtPassword).SendKeys("Password");
         }
     }
 }
