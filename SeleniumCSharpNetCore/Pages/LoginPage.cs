@@ -22,10 +22,11 @@ namespace SeleniumCSharpNetCore.Pages
         }
         public void ClickSubmitLogin()
         {
+            _waitActions.WaitForPageToLoaded();
             _waitActions.WaitForElementClickable(btnSubmitLogin);
             _waitActions.ClickElement(btnSubmitLogin);
         }
-        public void registerUserNameAndPassword()
+        public void RegisterUserNameAndPassword()
         {
             _driver.FindElement(txtEmailAddress).SendKeys("dnsvikas.wins@gmail.com");
             _driver.FindElement(txtPassword).SendKeys("Password");

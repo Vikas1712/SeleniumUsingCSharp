@@ -12,10 +12,11 @@ namespace SeleniumCSharpNetCore.Pages
             _waitActions = new WaitActionPage(driver);
         }
 
-        private readonly By linkSignIn = By.CssSelector("a[title='Log in to your customer account']");
+        private readonly By linkSignIn = By.PartialLinkText("Sign");
 
         public void ClickSignIn()
         {
+            _waitActions.WaitForPageToLoaded();
             _waitActions.WaitForElementClickable(linkSignIn);
             _waitActions.ClickElement(linkSignIn);
         }

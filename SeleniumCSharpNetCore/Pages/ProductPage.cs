@@ -13,7 +13,7 @@ namespace SeleniumCSharpNetCore.Pages
             this._driver = driver;
             _waitActions = new WaitActionPage(driver);
         }
-        private readonly By dropDownWomenProductCategory = By.CssSelector("a[title='Women']");
+        private readonly By dropDownWomenProductCategory = By.LinkText("Women");
         private readonly By imgProductIcon = By.CssSelector("img[title='Faded Short Sleeve T-shirts']");
         private readonly By txtProductDescription = By.Id("short_description_block");
         private readonly By btnAddToCart = By.Id("add_to_cart");

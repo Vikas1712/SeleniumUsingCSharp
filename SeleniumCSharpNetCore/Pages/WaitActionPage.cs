@@ -24,7 +24,6 @@ namespace SeleniumCSharpNetCore.Pages
 			{
 				Assert.Fail("Element hasn't become clickable in the provided time");
 			}
-
 			return matchingElement;
 		}
 
@@ -37,7 +36,6 @@ namespace SeleniumCSharpNetCore.Pages
 			{
 				Assert.Fail("Element hasn't become clickable in the provided time");
 			}
-
 			return matchingElement;
 		}
 
@@ -45,14 +43,12 @@ namespace SeleniumCSharpNetCore.Pages
 		{
 			WebDriverWait w = new WebDriverWait(_driver, TimeSpan.FromSeconds(DefaultWait));
 			var matchingElement = w.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
-
 			return matchingElement;
 		}
 		public IWebElement ClickElement(By by, string textToSearch = "")
 		{
 			var element = WaitForElementClickable(by, textToSearch);
 			element.Click();
-
 			return element;
 		}
 
@@ -77,7 +73,6 @@ namespace SeleniumCSharpNetCore.Pages
 			{
 				Assert.Fail("Element hasn't become clickable in the provided time-span");
 			}
-
 			return matchingElement;
 		}
 
@@ -85,6 +80,11 @@ namespace SeleniumCSharpNetCore.Pages
         {
 			IWebElement iframe = _driver.FindElement(By.TagName("iframe"));
 			_driver.SwitchTo().Frame(iframe);
+		}
+		public void WaitForPageToLoaded()
+		{
+			IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+			js.ExecuteScript("return document.readyState").ToString().Equals("complete");
 		}
 	}
 }

@@ -29,7 +29,7 @@ namespace SeleniumCSharpNetCore.Steps
         {
             homePage.OpenAutomationPracticeSite();
             homePage.ClickSignIn();
-            loginPage.registerUserNameAndPassword();
+            loginPage.RegisterUserNameAndPassword();
             loginPage.ClickSubmitLogin();
             productPage.SelectProductCategory();
             productPage.SelectProduct();
