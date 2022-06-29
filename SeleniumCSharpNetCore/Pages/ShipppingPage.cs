@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace SeleniumCSharpNetCore.Pages
+﻿namespace SeleniumCSharpNetCore.Pages
 {
     public class ShipppingPage
     {
@@ -15,16 +13,8 @@ namespace SeleniumCSharpNetCore.Pages
 
         private readonly By checkBoxTermsAndConition = By.CssSelector("#cgv");
         private readonly By btnShippingProceedToCheckout = By.CssSelector("button[name = 'processCarrier'] span");
-        
-        public void AgreeTermsAndContions()
-        {
-            _driver.FindElement(checkBoxTermsAndConition).Click();
-        }
 
-        public void SelectProceedToCheckout()
-        {
-            _waitActions.WaitForElementClickable(btnShippingProceedToCheckout);
-            _waitActions.ClickElement(btnShippingProceedToCheckout);
-        }
+        public void AgreeTermsAndContions() => _driver.FindElement(checkBoxTermsAndConition).Click();
+        public void SelectProceedToCheckout() => _waitActions.ClickElement(btnShippingProceedToCheckout);
     }
 }

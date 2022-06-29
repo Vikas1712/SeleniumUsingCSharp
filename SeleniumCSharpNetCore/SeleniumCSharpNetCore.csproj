@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
+	  <LangVersion>preview</LangVersion>
+	  <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 

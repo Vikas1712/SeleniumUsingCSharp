@@ -1,15 +1,13 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium.Support.UI;
 using System;
 using NUnit.Framework;
-using System.Linq;
 
 namespace SeleniumCSharpNetCore.Pages
 {
-	public class WaitActionPage
+    public class WaitActionPage
 	{
 		private IWebDriver _driver;
-		private const int DefaultWait = 60;
+		private const int DefaultWait = 90;
 
 		public WaitActionPage(IWebDriver webDriver)
 		{
