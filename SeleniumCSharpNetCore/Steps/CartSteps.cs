@@ -1,5 +1,3 @@
-using SeleniumCSharpNetCore.Pages;
-
 namespace SeleniumCSharpNetCore.Steps
 {
     [Binding]

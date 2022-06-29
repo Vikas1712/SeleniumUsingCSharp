@@ -1,6 +1,3 @@
-using SeleniumCSharpNetCore.Pages;
-using TechTalk.SpecFlow;
-
 namespace SeleniumCSharpNetCore.Steps
 {
     [Binding]

@@ -24,7 +24,6 @@ namespace SeleniumCSharpNetCore.Pages
 			}
 			return matchingElement;
 		}
-
 		public IWebElement WaitForElementClickable(By locator)
 		{
 			WebDriverWait w = new WebDriverWait(_driver, TimeSpan.FromSeconds(DefaultWait));
@@ -36,7 +35,6 @@ namespace SeleniumCSharpNetCore.Pages
 			}
 			return matchingElement;
 		}
-
 		public IWebElement WaitForElementDisplayed(By locator)
 		{
 			WebDriverWait w = new WebDriverWait(_driver, TimeSpan.FromSeconds(DefaultWait));
@@ -49,7 +47,6 @@ namespace SeleniumCSharpNetCore.Pages
 			element.Click();
 			return element;
 		}
-
 		internal IWebElement WaitForElementClickable(By locator, string textToSearch = "")
 		{
 			IWebElement matchingElement;
@@ -73,7 +70,6 @@ namespace SeleniumCSharpNetCore.Pages
 			}
 			return matchingElement;
 		}
-
 		public void SwitchToIFrame()
         {
 			IWebElement iframe = _driver.FindElement(By.TagName("iframe"));

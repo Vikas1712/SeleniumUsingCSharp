@@ -23,14 +23,12 @@
             actions.MoveToElement(_driver.FindElement(dropDownWomenProductCategory)).Perform();
             actions.MoveToElement(_driver.FindElement(linkTShirts)).Click().Perform();
         }
-
         public void SelectProduct()
         {
             Actions actions = new Actions(_driver);
             actions.MoveToElement(_driver.FindElement(imgProductIcon)).Perform();
             actions.MoveToElement(_driver.FindElement(quickView)).Click().Perform();
         }
-
         public void ViewProductDetail()
         {
             _waitActions.SwitchToIFrame();
@@ -38,16 +36,13 @@
             _waitActions.WaitForElementDisplayed(txtProductDescription);
             _driver.SwitchTo().DefaultContent();
         }
-
         public int CountNumberOfProducts() => _driver.FindElements(By.ClassName("product-image-container")).Count();
-
         public void SetFilterBasedOnCategory()
         {
             _waitActions.WaitForElementClickable(checkBoxSizeCategory);
             _waitActions.ClickElement(checkBoxSizeCategory);
             Thread.Sleep(5000);
         }
-        
         public void ClickAddToCart()
         {
             _waitActions.SwitchToIFrame();

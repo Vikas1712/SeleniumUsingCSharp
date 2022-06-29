@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using SeleniumCSharpNetCore.Pages;
-using TechTalk.SpecFlow;
 
 namespace SeleniumCSharpNetCore.Steps
 {
