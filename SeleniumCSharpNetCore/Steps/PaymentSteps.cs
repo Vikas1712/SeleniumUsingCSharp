@@ -49,9 +49,6 @@ namespace SeleniumCSharpNetCore.Steps
         }
 
         [Then(@"Confirmation is displayed to the user")]
-        public void ThenConfirmationIsDisplayedToTheUser()
-        {
-            paymentPage.VerifyOrderPlaceSuccessfully();
-        }
+        public void ThenConfirmationIsDisplayedToTheUser() => paymentPage.VerifyOrderPlaceSuccessfully();
     }
 }

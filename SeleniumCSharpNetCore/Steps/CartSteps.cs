@@ -1,5 +1,4 @@
 using SeleniumCSharpNetCore.Pages;
-using TechTalk.SpecFlow;
 
 namespace SeleniumCSharpNetCore.Steps
 {
@@ -58,16 +57,10 @@ namespace SeleniumCSharpNetCore.Steps
         }
 
         [When(@"User removes a product from the cart")]
-        public void WhenUserRemovesAProductFromTheCart()
-        {
-            cartPage.RemoveProductFromCart();
-        }
+        public void WhenUserRemovesAProductFromTheCart() => cartPage.RemoveProductFromCart();
 
         [Then(@"The cart should be empty")]
-        public void ThenTheCartShouldBeEmpty()
-        {
-            cartPage.VerifyCardIsEmpty();
-        }
+        public void ThenTheCartShouldBeEmpty() => cartPage.VerifyCardIsEmpty();
 
     }
 }
