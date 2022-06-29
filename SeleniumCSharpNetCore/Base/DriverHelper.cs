@@ -1,7 +1,4 @@
-﻿using AventStack.ExtentReports;
-using OpenQA.Selenium;
-
-namespace SeleniumCSharpNetCore.Pages
+﻿namespace SeleniumCSharpNetCore.Pages
 {
     public class DriverHelper
     {

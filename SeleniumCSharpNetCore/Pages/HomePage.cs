@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace SeleniumCSharpNetCore.Pages
+﻿namespace SeleniumCSharpNetCore.Pages
 {
     public class HomePage
     {
@@ -11,13 +9,12 @@ namespace SeleniumCSharpNetCore.Pages
             this._driver = driver;
             _waitActions = new WaitActionPage(driver);
         }
-
-        private readonly By linkSignIn = By.PartialLinkText("Sign");
-
+        private readonly By linkSignIn = By.CssSelector("a[title='Log in to your customer account']");
         public void ClickSignIn()
         {
             _waitActions.WaitForPageToLoaded();
             _waitActions.WaitForElementClickable(linkSignIn);
+            Thread.Sleep(5000);
             _waitActions.ClickElement(linkSignIn);
         }
         public void OpenAutomationPracticeSite()

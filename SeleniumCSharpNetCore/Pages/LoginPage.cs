@@ -11,19 +11,12 @@ namespace SeleniumCSharpNetCore.Pages
             this._driver = driver;
             _waitActions = new WaitActionPage(driver);
         }
-
         private readonly By txtEmailAddress = By.CssSelector("#email");
         private readonly By txtPassword = By.CssSelector("#passwd");
         private readonly By btnSubmitLogin = By.CssSelector("#SubmitLogin");
-        public void EnterUserNameAndPassword(string username, string password)
-        {
-            _driver.FindElement(txtEmailAddress).SendKeys(username);
-            _driver.FindElement(txtPassword).SendKeys(password);
-        }
         public void ClickSubmitLogin()
         {
             _waitActions.WaitForPageToLoaded();
-            _waitActions.WaitForElementClickable(btnSubmitLogin);
             _waitActions.ClickElement(btnSubmitLogin);
         }
         public void RegisterUserNameAndPassword()

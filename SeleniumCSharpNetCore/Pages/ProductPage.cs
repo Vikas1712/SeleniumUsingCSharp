@@ -1,8 +1,4 @@
-﻿using OpenQA.Selenium;
-using System.Linq;
-using System.Threading;
-
-namespace SeleniumCSharpNetCore.Pages
+﻿namespace SeleniumCSharpNetCore.Pages
 {
     public class ProductPage
     {
@@ -13,22 +9,26 @@ namespace SeleniumCSharpNetCore.Pages
             this._driver = driver;
             _waitActions = new WaitActionPage(driver);
         }
-        private readonly By dropDownWomenProductCategory = By.LinkText("Women");
+        private readonly By dropDownWomenProductCategory = By.CssSelector("a[title='Women']");
+        private readonly By linkTShirts = By.CssSelector("li[class='sfHover'] a[title='T-shirts']");
         private readonly By imgProductIcon = By.CssSelector("img[title='Faded Short Sleeve T-shirts']");
+        private readonly By quickView = By.CssSelector("a[class='quick-view'] span");
         private readonly By txtProductDescription = By.Id("short_description_block");
         private readonly By btnAddToCart = By.Id("add_to_cart");
-        private readonly By checkBoxProductCategory = By.CssSelector("label[for='layered_category_4']");
+        private readonly By checkBoxSizeCategory = By.CssSelector("ul[id='ul_layered_id_attribute_group_1'] li:nth-child(2)");
 
         public void SelectProductCategory()
         {
-            _waitActions.WaitForElementClickable(dropDownWomenProductCategory);
-            _waitActions.ClickElement(dropDownWomenProductCategory);
+            Actions actions = new Actions(_driver);
+            actions.MoveToElement(_driver.FindElement(dropDownWomenProductCategory)).Perform();
+            actions.MoveToElement(_driver.FindElement(linkTShirts)).Click().Perform();
         }
 
         public void SelectProduct()
         {
-            _waitActions.WaitForElementClickable(imgProductIcon);
-            _waitActions.ClickElement(imgProductIcon);
+            Actions actions = new Actions(_driver);
+            actions.MoveToElement(_driver.FindElement(imgProductIcon)).Perform();
+            actions.MoveToElement(_driver.FindElement(quickView)).Click().Perform();
         }
 
         public void ViewProductDetail()
@@ -39,24 +39,18 @@ namespace SeleniumCSharpNetCore.Pages
             _driver.SwitchTo().DefaultContent();
         }
 
-        public int CountNumberOfProducts()
-        {
-            var list = _driver.FindElement(By.ClassName("product_list"));
-            int listItems = list.FindElements(By.TagName("li")).Count();
-            return listItems;
-        }
+        public int CountNumberOfProducts() => _driver.FindElements(By.ClassName("product-image-container")).Count();
 
         public void SetFilterBasedOnCategory()
         {
-            _waitActions.WaitForElementClickable(checkBoxProductCategory);
-            _waitActions.ClickElement(checkBoxProductCategory);
+            _waitActions.WaitForElementClickable(checkBoxSizeCategory);
+            _waitActions.ClickElement(checkBoxSizeCategory);
             Thread.Sleep(5000);
         }
         
         public void ClickAddToCart()
         {
             _waitActions.SwitchToIFrame();
-            _waitActions.WaitForElementClickable(btnAddToCart);
             _waitActions.ClickElement(btnAddToCart);
             _driver.SwitchTo().DefaultContent();
         }
