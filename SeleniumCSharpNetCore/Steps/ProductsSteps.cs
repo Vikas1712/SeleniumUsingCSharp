@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using SeleniumCSharpNetCore.Pages;
-using TechTalk.SpecFlow;
 
 namespace SeleniumCSharpNetCore.Steps
 {
@@ -14,7 +12,6 @@ namespace SeleniumCSharpNetCore.Steps
         private int beforeCount;
         private int afterCount;
 
-
         public ProductsSteps(DriverHelper driverHelper)
         {
             _driverHelper = driverHelper;
@@ -24,11 +21,8 @@ namespace SeleniumCSharpNetCore.Steps
         }
 
         [Given(@"User is on automation practice site")]
-        public void GivenUserIsOnAutomationPracticeSite()
-        {
-            homePage.OpenAutomationPracticeSite();
-        }
-        
+        public void GivenUserIsOnAutomationPracticeSite() => homePage.OpenAutomationPracticeSite();
+
         [Given(@"User have selected a category on the website")]
         public void GivenUserHaveSelectedACategoryOnTheWebsite()
         {
@@ -50,17 +44,11 @@ namespace SeleniumCSharpNetCore.Steps
             productPage.SetFilterBasedOnCategory();
             afterCount = productPage.CountNumberOfProducts();
         }
-        
+
         [Then(@"All the details related to products are visible")]
-        public void ThenAllTheDetailsRelatedToProductsAreVisible()
-        {
-            productPage.ViewProductDetail();
-        }
-        
+        public void ThenAllTheDetailsRelatedToProductsAreVisible() => productPage.ViewProductDetail();
+
         [Then(@"The page is updated with correct products")]
-        public void ThenThePageIsUpdatedWithCorrectProducts()
-        {
-            Assert.AreNotEqual(beforeCount, afterCount);
-        }
+        public void ThenThePageIsUpdatedWithCorrectProducts() => Assert.AreEqual(beforeCount, afterCount);
     }
 }

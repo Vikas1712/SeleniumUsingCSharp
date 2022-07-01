@@ -1,15 +1,13 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium.Support.UI;
 using System;
 using NUnit.Framework;
-using System.Linq;
 
 namespace SeleniumCSharpNetCore.Pages
 {
-	public class WaitActionPage
+    public class WaitActionPage
 	{
 		private IWebDriver _driver;
-		private const int DefaultWait = 60;
+		private const int DefaultWait = 90;
 
 		public WaitActionPage(IWebDriver webDriver)
 		{
@@ -24,10 +22,8 @@ namespace SeleniumCSharpNetCore.Pages
 			{
 				Assert.Fail("Element hasn't become clickable in the provided time");
 			}
-
 			return matchingElement;
 		}
-
 		public IWebElement WaitForElementClickable(By locator)
 		{
 			WebDriverWait w = new WebDriverWait(_driver, TimeSpan.FromSeconds(DefaultWait));
@@ -37,25 +33,20 @@ namespace SeleniumCSharpNetCore.Pages
 			{
 				Assert.Fail("Element hasn't become clickable in the provided time");
 			}
-
 			return matchingElement;
 		}
-
 		public IWebElement WaitForElementDisplayed(By locator)
 		{
 			WebDriverWait w = new WebDriverWait(_driver, TimeSpan.FromSeconds(DefaultWait));
 			var matchingElement = w.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
-
 			return matchingElement;
 		}
 		public IWebElement ClickElement(By by, string textToSearch = "")
 		{
 			var element = WaitForElementClickable(by, textToSearch);
 			element.Click();
-
 			return element;
 		}
-
 		internal IWebElement WaitForElementClickable(By locator, string textToSearch = "")
 		{
 			IWebElement matchingElement;
@@ -77,14 +68,17 @@ namespace SeleniumCSharpNetCore.Pages
 			{
 				Assert.Fail("Element hasn't become clickable in the provided time-span");
 			}
-
 			return matchingElement;
 		}
-
 		public void SwitchToIFrame()
         {
 			IWebElement iframe = _driver.FindElement(By.TagName("iframe"));
 			_driver.SwitchTo().Frame(iframe);
+		}
+		public void WaitForPageToLoaded()
+		{
+			IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+			js.ExecuteScript("return document.readyState").ToString().Equals("complete");
 		}
 	}
 }

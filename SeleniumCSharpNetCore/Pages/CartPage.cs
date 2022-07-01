@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace SeleniumCSharpNetCore.Pages
+﻿namespace SeleniumCSharpNetCore.Pages
 {
     public class CartPage
     {
@@ -22,46 +20,13 @@ namespace SeleniumCSharpNetCore.Pages
         private readonly By btnSummaryProceedToCheckout = By.CssSelector("a[class='button btn btn-default standard-checkout button-medium'] span");
         private readonly By btnAddressProceedToCheckout = By.CssSelector("button[name = 'processAddress'] span");
         
-        public void SelectProceedToCheckout()
-        {
-            _waitActions.WaitForElementClickable(btnProceedToCheckout);
-            _waitActions.ClickElement(btnProceedToCheckout);
-        }
-        public void SelectSummaryProceedToCheckout()
-        {
-            _waitActions.WaitForElementClickable(btnSummaryProceedToCheckout);
-            _waitActions.ClickElement(btnSummaryProceedToCheckout);
-        }
-        public void SelectAddressProceedToCheckout()
-        {
-            _waitActions.WaitForElementClickable(btnAddressProceedToCheckout);
-            _waitActions.ClickElement(btnAddressProceedToCheckout);
-        }
-
-
-        public void SelectContinueToShopping()
-        {
-            _waitActions.WaitForElementClickable(btnContinueShopping);
-            _waitActions.ClickElement(btnContinueShopping);
-        }
-        public void ViewCartDetail()
-        {
-            _waitActions.WaitForElementDisplayed(txtProductAddedSuccessfully);
-        }
-        
-        public void VerifyCardAddedSuccessfully()
-        {
-            _waitActions.WaitForElementDisplayed(txtShoppingHeader);
-        }
-
-        public void RemoveProductFromCart()
-        {
-            _waitActions.WaitForElementClickable(btnRemoveCartDelete);
-            _waitActions.ClickElement(btnRemoveCartDelete);
-        }
-        public void VerifyCardIsEmpty()
-        {
-            _waitActions.WaitForElementDisplayed(txtCartIsEmpty);
-        }
+        public void SelectProceedToCheckout()=> _waitActions.ClickElement(btnProceedToCheckout);
+        public void SelectSummaryProceedToCheckout() => _waitActions.ClickElement(btnSummaryProceedToCheckout);
+        public void SelectAddressProceedToCheckout() => _waitActions.ClickElement(btnAddressProceedToCheckout);
+        public void SelectContinueToShopping() => _waitActions.ClickElement(btnContinueShopping);
+        public void ViewCartDetail() => _waitActions.WaitForElementDisplayed(txtProductAddedSuccessfully);
+        public void VerifyCardAddedSuccessfully() => _waitActions.WaitForElementDisplayed(txtShoppingHeader);
+        public void RemoveProductFromCart() => _waitActions.ClickElement(btnRemoveCartDelete);
+        public void VerifyCardIsEmpty() => _waitActions.WaitForElementDisplayed(txtCartIsEmpty);
     }
 }

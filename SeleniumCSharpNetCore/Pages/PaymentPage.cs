@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace SeleniumCSharpNetCore.Pages
+﻿namespace SeleniumCSharpNetCore.Pages
 {
     public class PaymentPage
     {
@@ -18,20 +16,8 @@ namespace SeleniumCSharpNetCore.Pages
         private readonly By txtOrderConfirmation = By.CssSelector(".page-heading");
         private readonly By alertOrderConfirmation = By.CssSelector(".alert.alert-success");
 
-        public void MakePaymentbyCheck()
-        {
-            _waitActions.WaitForElementClickable(btnPayBycheck);
-            _waitActions.ClickElement(btnPayBycheck);
-        }
-        public void SelectIConfirmMyOrder()
-        {
-            _waitActions.WaitForElementClickable(btnIConfirmMyOrder);
-            _waitActions.ClickElement(btnIConfirmMyOrder);
-        }
-        public void VerifyOrderPlaceSuccessfully()
-        {
-            _waitActions.WaitForElementDisplayed(txtOrderConfirmation);
-            _waitActions.WaitForElementDisplayed(alertOrderConfirmation);
-        }
+        public void MakePaymentbyCheck() => _waitActions.ClickElement(btnPayBycheck);
+        public void SelectIConfirmMyOrder() => _waitActions.ClickElement(btnIConfirmMyOrder);
+        public void VerifyOrderPlaceSuccessfully() => _waitActions.WaitForElementDisplayed(alertOrderConfirmation);
     }
 }

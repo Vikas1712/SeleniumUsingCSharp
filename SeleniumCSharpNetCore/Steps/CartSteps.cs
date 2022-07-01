@@ -1,6 +1,3 @@
-using SeleniumCSharpNetCore.Pages;
-using TechTalk.SpecFlow;
-
 namespace SeleniumCSharpNetCore.Steps
 {
     [Binding]
@@ -26,7 +23,7 @@ namespace SeleniumCSharpNetCore.Steps
         {
             homePage.OpenAutomationPracticeSite();
             homePage.ClickSignIn();
-            loginPage.registerUserNameAndPassword();
+            loginPage.RegisterUserNameAndPassword();
             loginPage.ClickSubmitLogin();
         }
 
@@ -58,16 +55,10 @@ namespace SeleniumCSharpNetCore.Steps
         }
 
         [When(@"User removes a product from the cart")]
-        public void WhenUserRemovesAProductFromTheCart()
-        {
-            cartPage.RemoveProductFromCart();
-        }
+        public void WhenUserRemovesAProductFromTheCart() => cartPage.RemoveProductFromCart();
 
         [Then(@"The cart should be empty")]
-        public void ThenTheCartShouldBeEmpty()
-        {
-            cartPage.VerifyCardIsEmpty();
-        }
+        public void ThenTheCartShouldBeEmpty() => cartPage.VerifyCardIsEmpty();
 
     }
 }

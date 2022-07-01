@@ -1,9 +1,4 @@
-﻿using AventStack.ExtentReports.Gherkin.Model;
-using SeleniumCSharpNetCore.Pages;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-
-namespace SeleniumCSharpNetCore.Steps
+﻿namespace SeleniumCSharpNetCore.Steps
 {
     [Binding]
     public sealed class LoginSteps
@@ -19,18 +14,12 @@ namespace SeleniumCSharpNetCore.Steps
         }
 
         [Given(@"I navigate to application")]
-        public void GivenINavigateToApplication()
-        {
-            homePage.OpenAutomationPracticeSite();
-        }
+        public void GivenINavigateToApplication() => homePage.OpenAutomationPracticeSite();
 
 
         [Given(@"I click the SignIn link")]
-        public void GivenIClickTheSignInLink()
-        {
-            homePage.ClickSignIn();
-        }
-        
+        public void GivenIClickTheSignInLink() => homePage.ClickSignIn();
+
         [Given(@"I enter username and password")]
         public void GivenIEnterUsernameAndPassword(Table table)
         {
@@ -38,23 +27,14 @@ namespace SeleniumCSharpNetCore.Steps
             //loginPage.EnterUserNameAndPassword(data.UserName,data.Password);
             loginPage.ClickSubmitLogin();
         }
-        
+
         [Given(@"I click SignIn Button")]
-        public void GivenIClickSignInButton()
-        {
-            loginPage.ClickSubmitLogin();
-        }
-        
+        public void GivenIClickSignInButton() => loginPage.ClickSubmitLogin();
+
         [Then(@"I should see user logged in to the application")]
-        public void ThenIShouldSeeUserLoggedInToTheApplication()
-        {
-            loginPage.ClickSubmitLogin();
-        }
+        public void ThenIShouldSeeUserLoggedInToTheApplication() => loginPage.ClickSubmitLogin();
 
         [Given(@"I am on automation practice site")]
-        public void GivenIAmOnAutomationPracticeSite()
-        {
-            _driverHelper.Driver.Navigate().GoToUrl("http://automationpractice.com");
-        }
+        public void GivenIAmOnAutomationPracticeSite() => _driverHelper.Driver.Navigate().GoToUrl("http://automationpractice.com");
     }
 }

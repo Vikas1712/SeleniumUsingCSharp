@@ -1,11 +1,7 @@
-﻿using AventStack.ExtentReports;
-using AventStack.ExtentReports.Gherkin.Model;
-using AventStack.ExtentReports.Reporter;
+﻿using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium.Chrome;
-using SeleniumCSharpNetCore.Pages;
 using System;
 using System.IO;
-using TechTalk.SpecFlow;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -54,10 +50,7 @@ namespace SeleniumCSharpNetCore.Hooks
         }
 
         [BeforeFeature]
-        public static void BeforeFeature(FeatureContext featureContext)
-        {
-            _featureName = extent.CreateTest<AventStack.ExtentReports.Gherkin.Model.Feature>(featureContext.FeatureInfo.Title);
-        }
+        public static void BeforeFeature(FeatureContext featureContext) => _featureName = extent.CreateTest<AventStack.ExtentReports.Gherkin.Model.Feature>(featureContext.FeatureInfo.Title);
 
         [BeforeScenario]
         public void BeforeScenario()
@@ -102,10 +95,8 @@ namespace SeleniumCSharpNetCore.Hooks
         }
 
         [AfterTestRun]
-        public static void TearDownReport()
-        {
+        public static void TearDownReport() =>
             //Flush report once test completes
             extent.Flush();
-        }
     }
 }

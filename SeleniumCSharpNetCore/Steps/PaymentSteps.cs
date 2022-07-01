@@ -1,6 +1,3 @@
-using SeleniumCSharpNetCore.Pages;
-using TechTalk.SpecFlow;
-
 namespace SeleniumCSharpNetCore.Steps
 {
     [Binding]
@@ -29,7 +26,7 @@ namespace SeleniumCSharpNetCore.Steps
         {
             homePage.OpenAutomationPracticeSite();
             homePage.ClickSignIn();
-            loginPage.registerUserNameAndPassword();
+            loginPage.RegisterUserNameAndPassword();
             loginPage.ClickSubmitLogin();
             productPage.SelectProductCategory();
             productPage.SelectProduct();
@@ -49,9 +46,6 @@ namespace SeleniumCSharpNetCore.Steps
         }
 
         [Then(@"Confirmation is displayed to the user")]
-        public void ThenConfirmationIsDisplayedToTheUser()
-        {
-            paymentPage.VerifyOrderPlaceSuccessfully();
-        }
+        public void ThenConfirmationIsDisplayedToTheUser() => paymentPage.VerifyOrderPlaceSuccessfully();
     }
 }
