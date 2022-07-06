@@ -7,17 +7,6 @@ namespace SeleniumCSharpNetCore.Pages
     public class WaitActionPage:BasePage
 	{
 		private const int DefaultWait = 90;
-        public IWebElement WaitForElementClickable(IWebElement element)
-		{
-			WebDriverWait w = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(DefaultWait));
-			var matchingElement = w.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
-			//identify element then obtain text
-			if (matchingElement == null)
-			{
-				Assert.Fail("Element hasn't become clickable in the provided time");
-			}
-			return matchingElement;
-		}
 		public IWebElement WaitForElementClickable(By locator)
 		{
 			WebDriverWait w = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(DefaultWait));
