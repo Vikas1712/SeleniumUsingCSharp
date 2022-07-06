@@ -1,16 +1,8 @@
 ﻿namespace SeleniumCSharpNetCore.Pages
 {
-    public class CartPage
+    public class CartPage: BasePage
     {
-        
-        private IWebDriver _driver;
-        private WaitActionPage _waitActions;
-        public CartPage(IWebDriver driver)
-        {
-            this._driver = driver;
-            _waitActions = new WaitActionPage(driver);
-        }
-
+        public WaitActionPage _waitActions = new WaitActionPage();
         private readonly By txtProductAddedSuccessfully = By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6'] h2");
         private readonly By btnProceedToCheckout = By.CssSelector("a[title='Proceed to checkout'] span");
         private readonly By btnContinueShopping = By.CssSelector("span[title='Continue shopping'] span:nth-child(1)");

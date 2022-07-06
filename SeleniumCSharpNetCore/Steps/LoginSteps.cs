@@ -3,14 +3,12 @@
     [Binding]
     public sealed class LoginSteps
     {
-        private readonly DriverHelper _driverHelper;
         private readonly HomePage homePage;
         private readonly LoginPage loginPage;
-        public LoginSteps(DriverHelper driverHelper)
+        public LoginSteps()
         {
-            _driverHelper = driverHelper;
-            homePage = new HomePage(_driverHelper.Driver);
-            loginPage = new LoginPage(_driverHelper.Driver);
+            homePage = new HomePage();
+            loginPage = new LoginPage();
         }
 
         [Given(@"I navigate to application")]
@@ -35,6 +33,6 @@
         public void ThenIShouldSeeUserLoggedInToTheApplication() => loginPage.ClickSubmitLogin();
 
         [Given(@"I am on automation practice site")]
-        public void GivenIAmOnAutomationPracticeSite() => _driverHelper.Driver.Navigate().GoToUrl("http://automationpractice.com");
+        public void GivenIAmOnAutomationPracticeSite() => DriverContext.Driver.Navigate().GoToUrl("http://automationpractice.com");
     }
 }

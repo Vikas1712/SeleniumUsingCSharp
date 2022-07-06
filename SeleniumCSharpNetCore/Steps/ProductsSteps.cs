@@ -5,19 +5,15 @@ namespace SeleniumCSharpNetCore.Steps
     [Binding]
     public class ProductsSteps
     {
-        private DriverHelper _driverHelper;
         HomePage homePage;
-        LoginPage loginPage;
         ProductPage productPage;
         private int beforeCount;
         private int afterCount;
 
-        public ProductsSteps(DriverHelper driverHelper)
+        public ProductsSteps()
         {
-            _driverHelper = driverHelper;
-            loginPage = new LoginPage(_driverHelper.Driver);
-            homePage = new HomePage(_driverHelper.Driver); 
-            productPage = new ProductPage(_driverHelper.Driver);
+            homePage = new HomePage(); 
+            productPage = new ProductPage();
         }
 
         [Given(@"User is on automation practice site")]

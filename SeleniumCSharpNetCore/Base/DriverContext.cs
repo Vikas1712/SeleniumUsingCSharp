@@ -1,9 +1,11 @@
 ﻿namespace SeleniumCSharpNetCore.Pages
 {
-    public class DriverHelper
+    public class DriverContext
     {
-        public IWebDriver Driver { get; set; }
-        public MediaEntityModelProvider CaptureScreenShot(string screenShotName)
+        private static IWebDriver _driver;
+        public static IWebDriver Driver { get { return _driver; } set { _driver = value; } }
+
+        public static MediaEntityModelProvider CaptureScreenShot(string screenShotName)
         {
             var screenshot = ((ITakesScreenshot)Driver).GetScreenshot().AsBase64EncodedString;
             return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();

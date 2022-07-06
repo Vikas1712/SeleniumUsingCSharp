@@ -10,8 +10,6 @@ namespace SeleniumCSharpNetCore.Hooks
     [Binding]
     public class Hooks
     {
-        private readonly DriverHelper _driverHelper;
-        private readonly FeatureContext _featureContext;
         private readonly ScenarioContext _scenarioContext;
         private ExtentTest _currentScenarioName;
         private static ExtentTest _featureName;
@@ -21,10 +19,8 @@ namespace SeleniumCSharpNetCore.Hooks
             + Path.DirectorySeparatorChar + "Result"
             + Path.DirectorySeparatorChar + "Result_" + DateTime.Now.ToString("ddMMyyyy HHmmss");
 
-        public Hooks(DriverHelper driverHelper,FeatureContext featureContext, ScenarioContext scenarioContext)
+        public Hooks( ScenarioContext scenarioContext)
         {
-            _driverHelper = driverHelper;
-            _featureContext = featureContext;
             _scenarioContext = scenarioContext;
         }
 
@@ -36,7 +32,7 @@ namespace SeleniumCSharpNetCore.Hooks
             {
                 _currentScenarioName.Skip(_scenarioContext.ScenarioExecutionStatus.ToString());
             }
-            _driverHelper.Driver.Quit();
+            DriverContext.Driver.Quit();
         }
 
         [BeforeTestRun]
@@ -60,7 +56,7 @@ namespace SeleniumCSharpNetCore.Hooks
             option.AddArguments("--disable-gpu");
             new DriverManager().SetUpDriver(new ChromeConfig());
             Console.WriteLine("Setup");
-            _driverHelper.Driver = new ChromeDriver(option);
+            DriverContext.Driver = new ChromeDriver(option);
 
             _currentScenarioName = _featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
 
@@ -84,7 +80,7 @@ namespace SeleniumCSharpNetCore.Hooks
             }
             else if (_scenarioContext.TestError != null)
             {
-                var mediaEntity = _driverHelper.CaptureScreenShot(_scenarioContext.ScenarioInfo.Title.Trim());
+                var mediaEntity = DriverContext.CaptureScreenShot(_scenarioContext.ScenarioInfo.Title.Trim());
                 if (stepType == "Given")
                     _currentScenarioName.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
                 else if (stepType == "When")

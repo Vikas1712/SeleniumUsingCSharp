@@ -1,14 +1,10 @@
-﻿namespace SeleniumCSharpNetCore.Pages
+﻿using SeleniumCSharpNetCore.Base;
+
+namespace SeleniumCSharpNetCore.Pages
 {
-    public class HomePage
+    public class HomePage : BasePage
     {
-        private readonly IWebDriver _driver;
-        private WaitActionPage _waitActions;
-        public HomePage(IWebDriver driver)
-        {
-            this._driver = driver;
-            _waitActions = new WaitActionPage(driver);
-        }
+        public WaitActionPage _waitActions = new WaitActionPage();
         private readonly By linkSignIn = By.CssSelector("a[title='Log in to your customer account']");
         public void ClickSignIn()
         {
@@ -20,8 +16,8 @@
         public void OpenAutomationPracticeSite()
         {
             string url = "http://automationpractice.com";
-            _driver.Navigate().GoToUrl(url);
-            _driver.Manage().Window.Maximize();
+            DriverContext.Driver.Navigate().GoToUrl(url);
+            DriverContext.Driver.Manage().Window.Maximize();
         }
     }
 }

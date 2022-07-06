@@ -4,18 +4,12 @@ using NUnit.Framework;
 
 namespace SeleniumCSharpNetCore.Pages
 {
-    public class WaitActionPage
+    public class WaitActionPage:BasePage
 	{
-		private IWebDriver _driver;
 		private const int DefaultWait = 90;
-
-		public WaitActionPage(IWebDriver webDriver)
+        public IWebElement WaitForElementClickable(IWebElement element)
 		{
-			_driver = webDriver;
-		}
-		public IWebElement WaitForElementClickable(IWebElement element)
-		{
-			WebDriverWait w = new WebDriverWait(_driver, TimeSpan.FromSeconds(DefaultWait));
+			WebDriverWait w = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(DefaultWait));
 			var matchingElement = w.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
 			//identify element then obtain text
 			if (matchingElement == null)
@@ -26,7 +20,7 @@ namespace SeleniumCSharpNetCore.Pages
 		}
 		public IWebElement WaitForElementClickable(By locator)
 		{
-			WebDriverWait w = new WebDriverWait(_driver, TimeSpan.FromSeconds(DefaultWait));
+			WebDriverWait w = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(DefaultWait));
 			var matchingElement = w.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
 			//identify element then obtain text
 			if (matchingElement == null)
@@ -37,7 +31,7 @@ namespace SeleniumCSharpNetCore.Pages
 		}
 		public IWebElement WaitForElementDisplayed(By locator)
 		{
-			WebDriverWait w = new WebDriverWait(_driver, TimeSpan.FromSeconds(DefaultWait));
+			WebDriverWait w = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(DefaultWait));
 			var matchingElement = w.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
 			return matchingElement;
 		}
@@ -50,7 +44,7 @@ namespace SeleniumCSharpNetCore.Pages
 		internal IWebElement WaitForElementClickable(By locator, string textToSearch = "")
 		{
 			IWebElement matchingElement;
-			WebDriverWait w = new WebDriverWait(_driver, TimeSpan.FromSeconds(DefaultWait));
+			WebDriverWait w = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(DefaultWait));
 			if (string.IsNullOrEmpty(textToSearch))
 			{
 				matchingElement = w.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
@@ -72,12 +66,12 @@ namespace SeleniumCSharpNetCore.Pages
 		}
 		public void SwitchToIFrame()
         {
-			IWebElement iframe = _driver.FindElement(By.TagName("iframe"));
-			_driver.SwitchTo().Frame(iframe);
+			IWebElement iframe = DriverContext.Driver.FindElement(By.TagName("iframe"));
+			DriverContext.Driver.SwitchTo().Frame(iframe);
 		}
 		public void WaitForPageToLoaded()
 		{
-			IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+			IJavaScriptExecutor js = (IJavaScriptExecutor)DriverContext.Driver;
 			js.ExecuteScript("return document.readyState").ToString().Equals("complete");
 		}
 	}

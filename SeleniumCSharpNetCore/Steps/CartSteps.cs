@@ -3,19 +3,17 @@ namespace SeleniumCSharpNetCore.Steps
     [Binding]
     public class CartSteps
     {
-        private readonly DriverHelper _driverHelper;
         private readonly HomePage homePage;
         private readonly LoginPage loginPage;
         private readonly ProductPage productPage;
         private readonly CartPage cartPage;
 
-        public CartSteps(DriverHelper driverHelper)
+        public CartSteps()
         {
-            _driverHelper = driverHelper;
-            homePage = new HomePage(_driverHelper.Driver);
-            loginPage = new LoginPage(_driverHelper.Driver);
-            productPage = new ProductPage(_driverHelper.Driver);
-            cartPage = new CartPage(_driverHelper.Driver); 
+            homePage = new HomePage();
+            loginPage = new LoginPage();
+            productPage = new ProductPage();
+            cartPage = new CartPage(); 
         }
 
         [Given(@"Register User is on the product page")]
