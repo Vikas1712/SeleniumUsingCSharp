@@ -8,6 +8,7 @@ global using AventStack.ExtentReports.Gherkin.Model;
 global using SeleniumCSharpNetCore.Pages;
 global using SeleniumCSharpNetCore.Base;
 global using SeleniumCSharpNetCore.Config;
+global using SeleniumCSharpNetCore.Extensions;
 
 namespace SeleniumCSharpNetCore
 {
