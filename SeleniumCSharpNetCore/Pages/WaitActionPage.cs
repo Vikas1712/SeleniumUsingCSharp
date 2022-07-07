@@ -58,10 +58,5 @@ namespace SeleniumCSharpNetCore.Pages
 			IWebElement iframe = DriverContext.Driver.FindElement(By.TagName("iframe"));
 			DriverContext.Driver.SwitchTo().Frame(iframe);
 		}
-		//public void WaitForPageToLoaded()
-		//{
-		//	IJavaScriptExecutor js = (IJavaScriptExecutor)DriverContext.Driver;
-		//	js.ExecuteScript("return document.readyState").ToString().Equals("complete");
-		//}
 	}
 }

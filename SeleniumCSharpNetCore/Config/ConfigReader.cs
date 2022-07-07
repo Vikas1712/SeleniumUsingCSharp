@@ -1,6 +1,7 @@
 ﻿//ConfigReader file read the custom XML file 
 //We are using System.XML namespace and will be using 
 //XPathItem and XPathDocument classes to perform operations.
+
 using System;
 using System.Xml.XPath;
 using System.IO;
@@ -32,7 +33,7 @@ namespace SeleniumCSharpNetCore.Config
             Settings.AUT = aut.Value.ToString();
             Settings.UserName = username.Value.ToString();
             Settings.Password = password.Value.ToString();
-            //Settings.BrowserType = browser.Value;
+            Settings.BrowserType = (BrowserType) Enum.Parse(typeof(BrowserType), browser.Value.ToString());
             Settings.BuildName = buildname.Value.ToString();
             Settings.TestType = testtype.Value.ToString();
             Settings.IsLog = islog.Value.ToString();
