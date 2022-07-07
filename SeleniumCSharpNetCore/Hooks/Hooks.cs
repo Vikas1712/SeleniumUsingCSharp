@@ -107,6 +107,7 @@ namespace SeleniumCSharpNetCore.Hooks
                 case BrowserType.Chrome:
                     ChromeOptions option = new ChromeOptions();
                     option.AddArguments("start-maximized");
+                    option.AddArguments("--headless");
                     option.AddArguments("--disable-gpu");
                     new DriverManager().SetUpDriver(new ChromeConfig());
                     Console.WriteLine("Setup");
