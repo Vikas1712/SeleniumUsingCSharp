@@ -1,26 +1,21 @@
 ﻿namespace SeleniumCSharpNetCore.Pages
 {
-    public class LoginPage
+    public class LoginPage:BasePage
     {
-        private readonly IWebDriver _driver;
-        private WaitActionPage _waitActions;
-        public LoginPage(IWebDriver driver)
-        {
-            this._driver = driver;
-            _waitActions = new WaitActionPage(driver);
-        }
+        public WaitActionPage _waitActions = new WaitActionPage();
         private readonly By txtEmailAddress = By.CssSelector("#email");
         private readonly By txtPassword = By.CssSelector("#passwd");
         private readonly By btnSubmitLogin = By.CssSelector("#SubmitLogin");
-        public void ClickSubmitLogin()
+        public ProductPage ClickSubmitLogin()
         {
             _waitActions.WaitForPageToLoaded();
             _waitActions.ClickElement(btnSubmitLogin);
+            return GetInstance<ProductPage>();
         }
         public void RegisterUserNameAndPassword()
         {
-            _driver.FindElement(txtEmailAddress).SendKeys("dnsvikas.wins@gmail.com");
-            _driver.FindElement(txtPassword).SendKeys("Password");
+            DriverContext.Driver.FindElement(txtEmailAddress).SendKeys(Settings.UserName);
+            DriverContext.Driver.FindElement(txtPassword).SendKeys(Settings.Password);
         }
     }
 }

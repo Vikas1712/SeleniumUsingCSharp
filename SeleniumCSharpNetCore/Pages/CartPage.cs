@@ -1,16 +1,8 @@
 ﻿namespace SeleniumCSharpNetCore.Pages
 {
-    public class CartPage
+    public class CartPage: BasePage
     {
-        
-        private IWebDriver _driver;
-        private WaitActionPage _waitActions;
-        public CartPage(IWebDriver driver)
-        {
-            this._driver = driver;
-            _waitActions = new WaitActionPage(driver);
-        }
-
+        public WaitActionPage _waitActions = new WaitActionPage();
         private readonly By txtProductAddedSuccessfully = By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6'] h2");
         private readonly By btnProceedToCheckout = By.CssSelector("a[title='Proceed to checkout'] span");
         private readonly By btnContinueShopping = By.CssSelector("span[title='Continue shopping'] span:nth-child(1)");
@@ -22,7 +14,11 @@
         
         public void SelectProceedToCheckout()=> _waitActions.ClickElement(btnProceedToCheckout);
         public void SelectSummaryProceedToCheckout() => _waitActions.ClickElement(btnSummaryProceedToCheckout);
-        public void SelectAddressProceedToCheckout() => _waitActions.ClickElement(btnAddressProceedToCheckout);
+        public ShipppingPage SelectAddressProceedToCheckout()
+        {
+            _waitActions.ClickElement(btnAddressProceedToCheckout);
+            return GetInstance<ShipppingPage>();
+        }
         public void SelectContinueToShopping() => _waitActions.ClickElement(btnContinueShopping);
         public void ViewCartDetail() => _waitActions.WaitForElementDisplayed(txtProductAddedSuccessfully);
         public void VerifyCardAddedSuccessfully() => _waitActions.WaitForElementDisplayed(txtShoppingHeader);

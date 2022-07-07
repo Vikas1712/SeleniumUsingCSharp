@@ -35,4 +35,10 @@
     <PackageReference Include="WebDriverManager" Version="2.13.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Config\GlobalConfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

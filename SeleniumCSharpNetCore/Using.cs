@@ -6,7 +6,8 @@ global using TechTalk.SpecFlow;
 global using AventStack.ExtentReports;
 global using AventStack.ExtentReports.Gherkin.Model;
 global using SeleniumCSharpNetCore.Pages;
-global using TechTalk.SpecFlow.Assist;
+global using SeleniumCSharpNetCore.Base;
+global using SeleniumCSharpNetCore.Config;
 
 namespace SeleniumCSharpNetCore
 {
