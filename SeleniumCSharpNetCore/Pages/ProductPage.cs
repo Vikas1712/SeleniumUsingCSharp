@@ -37,11 +37,12 @@
             _waitActions.ClickElement(checkBoxSizeCategory);
             Thread.Sleep(5000);
         }
-        public void ClickAddToCart()
+        public CartPage ClickAddToCart()
         {
             _waitActions.SwitchToIFrame();
             _waitActions.ClickElement(btnAddToCart);
             DriverContext.Driver.SwitchTo().DefaultContent();
+            return GetInstance<CartPage>();
         }
     }
 }

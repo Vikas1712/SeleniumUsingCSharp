@@ -1,7 +1,10 @@
-﻿namespace SeleniumCSharpNetCore.Pages
+﻿using OpenQA.Selenium;
+using System;
+namespace SeleniumCSharpNetCore.Base
 {
-    public class DriverContext
+    public static class DriverContext
     {
+
         private static IWebDriver _driver;
         public static IWebDriver Driver { get { return _driver; } set { _driver = value; } }
 

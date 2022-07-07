@@ -1,62 +1,51 @@
 namespace SeleniumCSharpNetCore.Steps
 {
     [Binding]
-    public class CartSteps
+    public class CartSteps : BasePage
     {
-        private readonly HomePage homePage;
-        private readonly LoginPage loginPage;
-        private readonly ProductPage productPage;
-        private readonly CartPage cartPage;
-
-        public CartSteps()
-        {
-            homePage = new HomePage();
-            loginPage = new LoginPage();
-            productPage = new ProductPage();
-            cartPage = new CartPage(); 
-        }
-
         [Given(@"Register User is on the product page")]
         public void GivenRegisterUserIsOnTheProductPage()
         {
-            homePage.OpenAutomationPracticeSite();
-            homePage.ClickSignIn();
-            loginPage.RegisterUserNameAndPassword();
-            loginPage.ClickSubmitLogin();
+            CurrentPage = GetInstance<HomePage>();
+            CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
+            CurrentPage = CurrentPage.As<HomePage>().ClickSignIn();
+            CurrentPage.As<LoginPage>().RegisterUserNameAndPassword();
+            CurrentPage=CurrentPage.As<LoginPage>().ClickSubmitLogin();
         }
 
         [When(@"User adds a product to the cart")]
         public void WhenUserAddsAProductToTheCart()
         {
-            productPage.SelectProductCategory();
-            productPage.SelectProduct();
-            productPage.ViewProductDetail();
-            productPage.ClickAddToCart();
+            CurrentPage.As<ProductPage>().SelectProductCategory();
+            CurrentPage.As<ProductPage>().SelectProduct();
+            CurrentPage.As<ProductPage>().ViewProductDetail();
+            CurrentPage=CurrentPage.As<ProductPage>().ClickAddToCart();
         }
 
         [Then(@"The cart should be updated")]
         public void ThenTheCartShouldBeUpdated()
         {
-            cartPage.ViewCartDetail();
-            cartPage.SelectProceedToCheckout();
-            cartPage.VerifyCardAddedSuccessfully();
+            CurrentPage.As<CartPage>().ViewCartDetail();
+            CurrentPage.As<CartPage>().SelectProceedToCheckout();
+            CurrentPage.As<CartPage>().VerifyCardAddedSuccessfully();
         }
 
         [Given(@"User have added few products in the cart")]
         public void GivenUserHaveAddedFewProductsInTheCart()
         {
-            homePage.OpenAutomationPracticeSite();
-            productPage.SelectProductCategory();
-            productPage.SelectProduct();
-            productPage.ClickAddToCart();
-            cartPage.SelectProceedToCheckout();
+            CurrentPage = GetInstance<HomePage>();
+            CurrentPage=CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
+            CurrentPage.As<ProductPage>().SelectProductCategory();
+            CurrentPage.As<ProductPage>().SelectProduct();
+            CurrentPage = CurrentPage.As<ProductPage>().ClickAddToCart();
+            CurrentPage.As<CartPage>().SelectProceedToCheckout();
         }
 
         [When(@"User removes a product from the cart")]
-        public void WhenUserRemovesAProductFromTheCart() => cartPage.RemoveProductFromCart();
+        public void WhenUserRemovesAProductFromTheCart() => CurrentPage.As<CartPage>().RemoveProductFromCart();
 
         [Then(@"The cart should be empty")]
-        public void ThenTheCartShouldBeEmpty() => cartPage.VerifyCardIsEmpty();
+        public void ThenTheCartShouldBeEmpty() => CurrentPage.As<CartPage>().VerifyCardIsEmpty();
 
     }
 }

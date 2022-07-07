@@ -6,10 +6,11 @@
         private readonly By txtEmailAddress = By.CssSelector("#email");
         private readonly By txtPassword = By.CssSelector("#passwd");
         private readonly By btnSubmitLogin = By.CssSelector("#SubmitLogin");
-        public void ClickSubmitLogin()
+        public ProductPage ClickSubmitLogin()
         {
             _waitActions.WaitForPageToLoaded();
             _waitActions.ClickElement(btnSubmitLogin);
+            return GetInstance<ProductPage>();
         }
         public void RegisterUserNameAndPassword()
         {
