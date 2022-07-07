@@ -1,4 +1,7 @@
-﻿using System;
+﻿//ConfigReader file read the custom XML file 
+//We are using System.XML namespace and will be using 
+//XPathItem and XPathDocument classes to perform operations.
+using System;
 using System.Xml.XPath;
 using System.IO;
 
