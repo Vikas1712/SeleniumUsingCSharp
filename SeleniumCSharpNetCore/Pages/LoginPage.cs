@@ -8,7 +8,8 @@
         private readonly By btnSubmitLogin = By.CssSelector("#SubmitLogin");
         public ProductPage ClickSubmitLogin()
         {
-            _waitActions.WaitForPageToLoaded();
+            //_waitActions.WaitForPageToLoaded();
+            DriverContext.Driver.WaitForPageToLoaded();
             _waitActions.ClickElement(btnSubmitLogin);
             return GetInstance<ProductPage>();
         }
