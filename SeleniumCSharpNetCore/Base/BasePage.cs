@@ -8,7 +8,6 @@
             //_driver = DriverContext.Driver;
             // _waitActions = new WaitActionPage();
         }
-
         private IWebDriver Driver { get; set; }
 
         protected TPage GetInstance<TPage>() where TPage : BasePage, new()

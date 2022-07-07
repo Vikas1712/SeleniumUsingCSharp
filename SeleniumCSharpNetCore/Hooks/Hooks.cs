@@ -51,15 +51,8 @@ namespace SeleniumCSharpNetCore.Hooks
         [BeforeScenario]
         public void BeforeScenario()
         {
-            ChromeOptions option = new ChromeOptions();
-            option.AddArguments("start-maximized");
-            option.AddArguments("--disable-gpu");
-            new DriverManager().SetUpDriver(new ChromeConfig());
-            Console.WriteLine("Setup");
-            DriverContext.Driver = new ChromeDriver(option);
-
+            OpenBrowser(BrowserType.Chrome);
             _currentScenarioName = _featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
-
         }
 
         [AfterStep]
@@ -91,8 +84,33 @@ namespace SeleniumCSharpNetCore.Hooks
         }
 
         [AfterTestRun]
-        public static void TearDownReport() =>
+        public static void TearDownReport() {
             //Flush report once test completes
             extent.Flush();
+        }
+
+        public static void OpenBrowser(BrowserType browserType)
+        {
+            switch (browserType)
+            {
+                case BrowserType.Edge:
+                    new DriverManager().SetUpDriver(new EdgeConfig());
+                    break;
+                case BrowserType.FireFox:
+                    new DriverManager().SetUpDriver(new FirefoxConfig());
+                    break;
+                case BrowserType.Chrome:
+                    ChromeOptions option = new ChromeOptions();
+                    option.AddArguments("start-maximized");
+                    option.AddArguments("--disable-gpu");
+                    new DriverManager().SetUpDriver(new ChromeConfig());
+                    Console.WriteLine("Setup");
+                    DriverContext.Driver = new ChromeDriver(option);
+                    break;
+                case BrowserType.Opera:
+                    new DriverManager().SetUpDriver(new OperaConfig());
+                    break;
+            }
+        }
     }
 }
