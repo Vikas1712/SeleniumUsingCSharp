@@ -14,7 +14,11 @@
         
         public void SelectProceedToCheckout()=> _waitActions.ClickElement(btnProceedToCheckout);
         public void SelectSummaryProceedToCheckout() => _waitActions.ClickElement(btnSummaryProceedToCheckout);
-        public void SelectAddressProceedToCheckout() => _waitActions.ClickElement(btnAddressProceedToCheckout);
+        public ShipppingPage SelectAddressProceedToCheckout()
+        {
+            _waitActions.ClickElement(btnAddressProceedToCheckout);
+            return GetInstance<ShipppingPage>();
+        }
         public void SelectContinueToShopping() => _waitActions.ClickElement(btnContinueShopping);
         public void ViewCartDetail() => _waitActions.WaitForElementDisplayed(txtProductAddedSuccessfully);
         public void VerifyCardAddedSuccessfully() => _waitActions.WaitForElementDisplayed(txtShoppingHeader);

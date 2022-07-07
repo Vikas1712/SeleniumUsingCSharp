@@ -1,49 +1,34 @@
 namespace SeleniumCSharpNetCore.Steps
 {
     [Binding]
-    public class PaymentSteps
+    public class PaymentSteps : BasePage
     {
-        private readonly HomePage homePage;
-        private readonly ProductPage productPage;
-        private readonly CartPage cartPage;
-        private readonly LoginPage loginPage;
-        private readonly ShipppingPage shipppingPage;
-        private readonly PaymentPage paymentPage;
-        public PaymentSteps()
-        {
-            homePage = new HomePage();
-            loginPage = new LoginPage();
-            productPage = new ProductPage();
-            cartPage = new CartPage();
-            shipppingPage = new ShipppingPage();
-            paymentPage = new PaymentPage();
-        }
-
         [Given(@"User have products added to the cart")]
         public void GivenUserHaveProductsAddedToTheCart()
         {
-            homePage.OpenAutomationPracticeSite();
-            homePage.ClickSignIn();
-            loginPage.RegisterUserNameAndPassword();
-            loginPage.ClickSubmitLogin();
-            productPage.SelectProductCategory();
-            productPage.SelectProduct();
-            productPage.ClickAddToCart();
-            cartPage.SelectProceedToCheckout();
-            cartPage.SelectSummaryProceedToCheckout();
-            cartPage.SelectAddressProceedToCheckout();
-            shipppingPage.AgreeTermsAndContions();
-            shipppingPage.SelectProceedToCheckout();
+            CurrentPage = GetInstance<HomePage>();
+            CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
+            CurrentPage = CurrentPage.As<HomePage>().ClickSignIn();
+            CurrentPage.As<LoginPage>().RegisterUserNameAndPassword();
+            CurrentPage = CurrentPage.As<LoginPage>().ClickSubmitLogin();
+            CurrentPage.As<ProductPage>().SelectProductCategory();
+            CurrentPage.As<ProductPage>().SelectProduct();
+            CurrentPage=CurrentPage.As<ProductPage>().ClickAddToCart();
+            CurrentPage.As<CartPage>().SelectProceedToCheckout();
+            CurrentPage.As<CartPage>().SelectSummaryProceedToCheckout();
+            CurrentPage=CurrentPage.As<CartPage>().SelectAddressProceedToCheckout();
+            CurrentPage.As<ShipppingPage>().AgreeTermsAndContions();
+            CurrentPage=CurrentPage.As<ShipppingPage>().SelectProceedToCheckout();
         }
 
         [When(@"User makes the payment after filling all details")]
         public void WhenUserMakesThePaymentAfterFillingAllDetails()
         {
-            paymentPage.MakePaymentbyCheck();
-            paymentPage.SelectIConfirmMyOrder();
+            CurrentPage.As<PaymentPage>().MakePaymentbyCheck();
+            CurrentPage.As<PaymentPage>().SelectIConfirmMyOrder();
         }
 
         [Then(@"Confirmation is displayed to the user")]
-        public void ThenConfirmationIsDisplayedToTheUser() => paymentPage.VerifyOrderPlaceSuccessfully();
+        public void ThenConfirmationIsDisplayedToTheUser() => CurrentPage.As<PaymentPage>().VerifyOrderPlaceSuccessfully();
     }
 }
