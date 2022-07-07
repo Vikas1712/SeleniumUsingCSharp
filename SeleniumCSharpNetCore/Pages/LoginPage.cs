@@ -14,8 +14,8 @@
         }
         public void RegisterUserNameAndPassword()
         {
-            DriverContext.Driver.FindElement(txtEmailAddress).SendKeys("dnsvikas.wins@gmail.com");
-            DriverContext.Driver.FindElement(txtPassword).SendKeys("Password");
+            DriverContext.Driver.FindElement(txtEmailAddress).SendKeys(Settings.UserName);
+            DriverContext.Driver.FindElement(txtPassword).SendKeys(Settings.Password);
         }
     }
 }

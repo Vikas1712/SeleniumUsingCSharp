@@ -51,6 +51,7 @@ namespace SeleniumCSharpNetCore.Hooks
         [BeforeScenario]
         public void BeforeScenario()
         {
+            ConfigReader.SetFrameworkSettings();
             OpenBrowser(BrowserType.Chrome);
             _currentScenarioName = _featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
         }

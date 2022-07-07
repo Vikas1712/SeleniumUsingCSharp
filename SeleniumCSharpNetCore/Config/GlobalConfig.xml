@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SeleniumCSharpFramework>
+  <RunSettings>
+    <AUT>http://automationpractice.com</AUT>
+	<Username>dnsvikas.wins@gmail.com</Username>
+	<Password>Password</Password>
+    <Browser>Chrome</Browser> <!-- Possible flag Chrome,Firefox, IE-->
+    <TestType>SmokeTest</TestType> <!-- Possible flag Smoke, Regression, Unit  -->
+    <IsLog>Y</IsLog> <!-- Possible Flag Y, N -->
+    <BuildName>DemoBuild</BuildName>
+    <IsReport>N</IsReport> <!-- Possible Flag Y, N -->
+  </RunSettings>
+</SeleniumCSharpFramework>

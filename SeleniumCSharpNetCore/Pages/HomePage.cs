@@ -1,6 +1,4 @@
-﻿using SeleniumCSharpNetCore.Base;
-
-namespace SeleniumCSharpNetCore.Pages
+﻿namespace SeleniumCSharpNetCore.Pages
 {
     public class HomePage : BasePage
     {
@@ -16,8 +14,7 @@ namespace SeleniumCSharpNetCore.Pages
         }
         public ProductPage OpenAutomationPracticeSite()
         {
-            string url = "http://automationpractice.com";
-            DriverContext.Driver.Navigate().GoToUrl(url);
+            DriverContext.Driver.Navigate().GoToUrl(Settings.AUT);
             DriverContext.Driver.Manage().Window.Maximize();
             return GetInstance<ProductPage>();
         }

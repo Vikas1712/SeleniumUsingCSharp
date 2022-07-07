@@ -10,7 +10,6 @@
         private readonly By txtProductDescription = By.Id("short_description_block");
         private readonly By btnAddToCart = By.Id("add_to_cart");
         private readonly By checkBoxSizeCategory = By.CssSelector("ul[id='ul_layered_id_attribute_group_1'] li:nth-child(2)");
-
         public void SelectProductCategory()
         {
             Actions actions = new Actions(DriverContext.Driver);
