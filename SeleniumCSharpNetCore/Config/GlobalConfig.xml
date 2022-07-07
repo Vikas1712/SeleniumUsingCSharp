@@ -4,7 +4,7 @@
     <AUT>http://automationpractice.com</AUT>
 	<Username>dnsvikas.wins@gmail.com</Username>
 	<Password>Password</Password>
-    <Browser>Edge</Browser> <!-- Possible flag : Chrome,Firefox, Edge-->
+    <Browser>Chrome</Browser> <!-- Possible flag : Chrome,Firefox, Edge-->
     <TestType>SmokeTest</TestType> <!-- Possible flag : Smoke, Regression, Unit  -->
     <IsLog>Y</IsLog> <!-- Possible Flag Y, N -->
     <BuildName>DemoBuild</BuildName>
