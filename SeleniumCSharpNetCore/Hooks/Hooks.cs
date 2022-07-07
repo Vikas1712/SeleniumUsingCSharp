@@ -1,5 +1,7 @@
 ﻿using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.IO;
 using WebDriverManager;
@@ -13,7 +15,7 @@ namespace SeleniumCSharpNetCore.Hooks
         private readonly ScenarioContext _scenarioContext;
         private ExtentTest _currentScenarioName;
         private static ExtentTest _featureName;
-        private static AventStack.ExtentReports.ExtentReports extent;
+        private static ExtentReports extent;
 
         static string reportPath = System.IO.Directory.GetParent(@"../../../").FullName
             + Path.DirectorySeparatorChar + "Result"
@@ -52,7 +54,7 @@ namespace SeleniumCSharpNetCore.Hooks
         public void BeforeScenario()
         {
             ConfigReader.SetFrameworkSettings();
-            OpenBrowser(BrowserType.Chrome);
+            OpenBrowser(Settings.BrowserType);
             _currentScenarioName = _featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
         }
 
@@ -96,9 +98,11 @@ namespace SeleniumCSharpNetCore.Hooks
             {
                 case BrowserType.Edge:
                     new DriverManager().SetUpDriver(new EdgeConfig());
+                    DriverContext.Driver = new EdgeDriver();
                     break;
-                case BrowserType.FireFox:
+                case BrowserType.Firefox:
                     new DriverManager().SetUpDriver(new FirefoxConfig());
+                    DriverContext.Driver = new FirefoxDriver();
                     break;
                 case BrowserType.Chrome:
                     ChromeOptions option = new ChromeOptions();

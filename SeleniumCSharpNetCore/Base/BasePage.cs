@@ -1,4 +1,9 @@
-﻿namespace SeleniumCSharpNetCore.Base
+﻿//Instead of initializing a page in each class we created a base abstract class. 
+//We are using Generic type parameter T which make it possible to design classes and method 
+//that defer the specification of one or more types until the 
+//classes and method is declared and instantiated by code
+
+namespace SeleniumCSharpNetCore.Base
 {
     public abstract class BasePage:Base
     {

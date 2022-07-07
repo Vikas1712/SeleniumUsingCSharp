@@ -6,7 +6,7 @@
         private readonly By linkSignIn = By.CssSelector("a[title='Log in to your customer account']");
         public LoginPage ClickSignIn()
         {
-            _waitActions.WaitForPageToLoaded();
+            DriverContext.Driver.WaitForPageToLoaded();
             _waitActions.WaitForElementClickable(linkSignIn);
             Thread.Sleep(5000);
             _waitActions.ClickElement(linkSignIn);

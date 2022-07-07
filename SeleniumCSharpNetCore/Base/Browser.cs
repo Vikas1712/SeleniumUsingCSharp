@@ -1,18 +1,17 @@
-﻿namespace SeleniumCSharpNetCore.Base
+﻿//Selenium support different browser like chrome, firefox, edge etc
+//Strongly-typed code, we can do using enum by creating browser type with enum
+//and call them with it own class
+
+namespace SeleniumCSharpNetCore.Base
 {
     public class Browser
     {
-        private readonly IWebDriver _driver;
-        public Browser(IWebDriver driver)
-        {
-            _driver = driver;   
-        }
         public Browser Type { get; set; }
     }
     public enum BrowserType
     {
         Edge,
-        FireFox,
+        Firefox,
         Chrome,
         Opera
     }
