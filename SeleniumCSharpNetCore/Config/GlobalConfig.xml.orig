@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SeleniumCSharpFramework>
+<<<<<<< HEAD
 	<RunSettings>
 		<AUT>http://automationpractice.com</AUT>
 		<Username>dnsvikas.wins@gmail.com</Username>
@@ -16,4 +17,16 @@
 		<DefaultWait>90</DefaultWait>
 		<!-- Possible flag: 45, 60,90 -->
 	</RunSettings>
+=======
+  <RunSettings>
+    <AUT>http://automationpractice.com</AUT>
+	<Username>dnsvikas.wins@gmail.com</Username>
+	<Password>Password</Password>
+    <Browser>Chrome</Browser> <!-- Possible flag : Chrome,Firefox, Edge-->
+    <TestType>SmokeTest</TestType> <!-- Possible flag : Smoke, Regression, Unit  -->
+    <IsLog>Y</IsLog> <!-- Possible Flag Y, N -->
+    <BuildName>DemoBuild</BuildName>
+    <IsReport>N</IsReport> <!-- Possible Flag Y, N -->
+  </RunSettings>
+>>>>>>> 8cad62f2252c950bb812c14fad0ef219ce940106
 </SeleniumCSharpFramework>

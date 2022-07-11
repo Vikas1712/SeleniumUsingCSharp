@@ -1,14 +1,16 @@
 ﻿namespace SeleniumCSharpNetCore.Pages
 {
-    public class ShipppingPage:BasePage
+    public class ShipppingPage : BasePage
     {
-        public WaitActionPage _waitActions = new WaitActionPage();
-        private readonly By checkBoxTermsAndConition = By.CssSelector("#cgv");
-        private readonly By btnShippingProceedToCheckout = By.CssSelector("button[name = 'processCarrier'] span");
-        public void AgreeTermsAndContions() => DriverContext.Driver.FindElement(checkBoxTermsAndConition).Click();
+        private IWebElement CheckBoxTermsAndConition => DriverContext.Driver.FindElement(By.CssSelector("#cgv"));
+
+        private IWebElement BtnShippingProceedToCheckout => DriverContext.Driver.FindElement(By.CssSelector("button[name = 'processCarrier'] span"));
+
+        public void AgreeTermsAndContions() => CheckBoxTermsAndConition.Click();
+
         public PaymentPage SelectProceedToCheckout()
         {
-            _waitActions.ClickElement(btnShippingProceedToCheckout);
+            BtnShippingProceedToCheckout.ClickElement();
             return GetInstance<PaymentPage>();
         }
     }

@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
+using WebDriverManager.Helpers;
 
 namespace SeleniumCSharpNetCore.Hooks
 {
@@ -17,11 +18,11 @@ namespace SeleniumCSharpNetCore.Hooks
         private static ExtentTest _featureName;
         private static ExtentReports extent;
 
-        static string reportPath = System.IO.Directory.GetParent(@"../../../").FullName
+        private static readonly string reportPath = System.IO.Directory.GetParent(@"../../../").FullName
             + Path.DirectorySeparatorChar + "Result"
             + Path.DirectorySeparatorChar + "Result_" + DateTime.Now.ToString("ddMMyyyy HHmmss");
 
-        public Hooks( ScenarioContext scenarioContext)
+        public Hooks(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
         }
@@ -30,7 +31,7 @@ namespace SeleniumCSharpNetCore.Hooks
         public void AfterScenario()
         {
             var type = _scenarioContext.ScenarioExecutionStatus.ToString();
-            if(type == "UndefinedStep")
+            if (type == "UndefinedStep")
             {
                 _currentScenarioName.Skip(_scenarioContext.ScenarioExecutionStatus.ToString());
             }
@@ -65,29 +66,48 @@ namespace SeleniumCSharpNetCore.Hooks
 
             if (_scenarioContext.TestError == null)
             {
-                if (stepType == "Given")
-                    _currentScenarioName.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text);
-                else if (stepType == "When")
-                    _currentScenarioName.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text);
-                else if (stepType == "Then")
-                    _currentScenarioName.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text);
-                else if (stepType == "And")
-                    _currentScenarioName.CreateNode<And>(_scenarioContext.StepContext.StepInfo.Text);
+                switch (stepType)
+                {
+                    case "Given":
+                        _currentScenarioName.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text);
+                        break;
+
+                    case "When":
+                        _currentScenarioName.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text);
+                        break;
+
+                    case "Then":
+                        _currentScenarioName.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text);
+                        break;
+
+                    case "And":
+                        _currentScenarioName.CreateNode<And>(_scenarioContext.StepContext.StepInfo.Text);
+                        break;
+                }
             }
             else if (_scenarioContext.TestError != null)
             {
                 var mediaEntity = DriverContext.CaptureScreenShot(_scenarioContext.ScenarioInfo.Title.Trim());
-                if (stepType == "Given")
-                    _currentScenarioName.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
-                else if (stepType == "When")
-                    _currentScenarioName.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
-                else if (stepType == "Then")
-                    _currentScenarioName.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
+                switch (stepType)
+                {
+                    case "Given":
+                        _currentScenarioName.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
+                        break;
+
+                    case "When":
+                        _currentScenarioName.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
+                        break;
+
+                    case "Then":
+                        _currentScenarioName.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message, mediaEntity);
+                        break;
+                }
             }
         }
 
         [AfterTestRun]
-        public static void TearDownReport() {
+        public static void TearDownReport()
+        {
             //Flush report once test completes
             extent.Flush();
         }
@@ -97,22 +117,24 @@ namespace SeleniumCSharpNetCore.Hooks
             switch (browserType)
             {
                 case BrowserType.Edge:
-                    new DriverManager().SetUpDriver(new EdgeConfig());
+                    new DriverManager().SetUpDriver(new EdgeConfig(), VersionResolveStrategy.MatchingBrowser);
                     DriverContext.Driver = new EdgeDriver();
                     break;
+
                 case BrowserType.Firefox:
-                    new DriverManager().SetUpDriver(new FirefoxConfig());
+                    new DriverManager().SetUpDriver(new FirefoxConfig(), VersionResolveStrategy.MatchingBrowser);
                     DriverContext.Driver = new FirefoxDriver();
                     break;
+
                 case BrowserType.Chrome:
-                    ChromeOptions option = new ChromeOptions();
+                    ChromeOptions option = new();
                     option.AddArguments("start-maximized");
-                    option.AddArguments("--headless");
                     option.AddArguments("--disable-gpu");
                     new DriverManager().SetUpDriver(new ChromeConfig());
                     Console.WriteLine("Setup");
                     DriverContext.Driver = new ChromeDriver(option);
                     break;
+
                 case BrowserType.Opera:
                     new DriverManager().SetUpDriver(new OperaConfig());
                     break;

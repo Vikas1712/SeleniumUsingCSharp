@@ -9,26 +9,25 @@ namespace SeleniumCSharpNetCore.Extensions
         {
             driver.WaitForCondition(drv =>
             {
-                string state = drv.ExecuteJs("return document.readyState").ToString();
+                string state = drv.ExecuteJs("return document.readyState").ToString().ToLower();
                 return state == "complete";
-            }, 90);
+            }, Settings.DefaultWait);
         }
 
         internal static void WaitForCondition<T>(this T obj, Func<T, bool> condition, int timeOut)
         {
-            Func<T, bool> execute =
-                (arg) =>
+            bool execute(T arg)
+            {
+                try
                 {
-                    try
-                    {
-                        return condition(arg);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        return false;
-                    }
-                };
+                    return condition(arg);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return false;
+                }
+            }
 
             var sw = Stopwatch.StartNew();
             while (sw.ElapsedMilliseconds < timeOut)
@@ -40,9 +39,12 @@ namespace SeleniumCSharpNetCore.Extensions
             }
         }
 
-        internal static object ExecuteJs(this IWebDriver driver, string script)
+        internal static object ExecuteJs(this IWebDriver driver, string script) => ((IJavaScriptExecutor)driver).ExecuteScript(script);
+
+        internal static void SwitchToIFrame(this IWebDriver driver)
         {
-            return ((IJavaScriptExecutor)DriverContext.Driver).ExecuteScript(script);
+            IWebElement iframe = driver.FindElement(By.TagName("iframe"));
+            DriverContext.Driver.SwitchTo().Frame(iframe);
         }
     }
 }

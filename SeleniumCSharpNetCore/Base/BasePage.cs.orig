@@ -1,9 +1,16 @@
+<<<<<<< .merge_file_a23036
 ﻿/*
 Instead of initializing a page in each class we created a base abstract class.
 We are using Generic type parameter T which make it possible to design classes and method
 that defer the specification of one or more types until the
 classes and method is declared and instantiated by code
 */
+=======
+﻿//Instead of initializing a page in each class we created a base abstract class.
+//We are using Generic type parameter T which make it possible to design classes and method
+//that defer the specification of one or more types until the
+//classes and method is declared and instantiated by code
+>>>>>>> .merge_file_a31332
 
 namespace SeleniumCSharpNetCore.Base
 {
@@ -17,7 +24,7 @@ namespace SeleniumCSharpNetCore.Base
 
         protected TPage GetInstance<TPage>() where TPage : BasePage, new()
         {
-            TPage pageInstance = new()
+            TPage pageInstance = new TPage()
             {
                 Driver = DriverContext.Driver
             };

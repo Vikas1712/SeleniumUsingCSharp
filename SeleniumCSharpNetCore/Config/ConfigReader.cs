@@ -1,10 +1,12 @@
-﻿//ConfigReader file read the custom XML file 
-//We are using System.XML namespace and will be using 
-//XPathItem and XPathDocument classes to perform operations.
+﻿/*
+ConfigReader file read the custom XML file
+We are using System.XML namespace and will be using
+XPathItem and XPathDocument classes to perform operations.
+*/
 
 using System;
-using System.Xml.XPath;
 using System.IO;
+using System.Xml.XPath;
 
 namespace SeleniumCSharpNetCore.Config
 {
@@ -12,11 +14,11 @@ namespace SeleniumCSharpNetCore.Config
     {
         public static void SetFrameworkSettings()
         {
-            XPathItem aut, username, password, browser, testtype, islog, isreport, buildname;
+            XPathItem aut, username, password, browser, testtype, islog, isreport, buildname, defaultWait;
 
             string strFilename = Environment.CurrentDirectory.ToString() + "\\Config\\GlobalConfig.xml";
-            FileStream stream = new FileStream(strFilename, FileMode.Open);
-            XPathDocument document = new XPathDocument(stream);
+            FileStream stream = new(strFilename, FileMode.Open);
+            XPathDocument document = new(stream);
             XPathNavigator navigator = document.CreateNavigator();
 
             //Get XML Details and pass it in XPathItem type variables
@@ -28,17 +30,17 @@ namespace SeleniumCSharpNetCore.Config
             testtype = navigator.SelectSingleNode("SeleniumCSharpFramework/RunSettings/TestType");
             islog = navigator.SelectSingleNode("SeleniumCSharpFramework/RunSettings/IsLog");
             isreport = navigator.SelectSingleNode("SeleniumCSharpFramework/RunSettings/IsReport");
-
+            defaultWait = navigator.SelectSingleNode("SeleniumCSharpFramework/RunSettings/DefaultWait");
             //Set XML Details in the property to be used accross framework
             Settings.AUT = aut.Value.ToString();
             Settings.UserName = username.Value.ToString();
             Settings.Password = password.Value.ToString();
-            Settings.BrowserType = (BrowserType) Enum.Parse(typeof(BrowserType), browser.Value.ToString());
+            Settings.BrowserType = (BrowserType)Enum.Parse(typeof(BrowserType), browser.Value.ToString());
             Settings.BuildName = buildname.Value.ToString();
             Settings.TestType = testtype.Value.ToString();
             Settings.IsLog = islog.Value.ToString();
             Settings.IsReport = isreport.Value.ToString();
+            Settings.DefaultWait = int.Parse(defaultWait.Value);
         }
-
     }
 }

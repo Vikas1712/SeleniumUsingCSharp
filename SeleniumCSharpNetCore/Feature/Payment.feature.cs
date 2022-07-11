@@ -75,11 +75,11 @@ namespace SeleniumCSharpNetCore.Feature
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Validate user is able to pay for the product added to the cart")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("Payment")]
         public void ValidateUserIsAbleToPayForTheProductAddedToTheCart()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
+                    "Payment"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate user is able to pay for the product added to the cart", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 5

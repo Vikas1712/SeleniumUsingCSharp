@@ -12,28 +12,28 @@ namespace SeleniumCSharpNetCore.Steps
         public void GivenUserIsOnAutomationPracticeSite()
         {
             CurrentPage = GetInstance<HomePage>();
-            CurrentPage=CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
+            CurrentPage = CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
         }
 
         [Given(@"User have selected a category on the website")]
         public void GivenUserHaveSelectedACategoryOnTheWebsite()
         {
             CurrentPage = GetInstance<HomePage>();
-            CurrentPage=CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
+            CurrentPage = CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
             CurrentPage.As<ProductPage>().SelectProductCategory();
         }
-        
+
         [When(@"User selects a product from the list")]
         public void WhenUserSelectsAProductFromTheList()
         {
             CurrentPage.As<ProductPage>().SelectProductCategory();
             CurrentPage.As<ProductPage>().SelectProduct();
         }
-        
+
         [When(@"User applys filter to the products")]
         public void WhenUserApplysFilterToTheProducts()
         {
-            beforeCount= CurrentPage.As<ProductPage>().CountNumberOfProducts();
+            beforeCount = CurrentPage.As<ProductPage>().CountNumberOfProducts();
             CurrentPage.As<ProductPage>().SetFilterBasedOnCategory();
             afterCount = CurrentPage.As<ProductPage>().CountNumberOfProducts();
         }

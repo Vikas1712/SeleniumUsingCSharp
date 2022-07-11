@@ -13,12 +13,12 @@ namespace SeleniumCSharpNetCore.Steps
             CurrentPage = CurrentPage.As<LoginPage>().ClickSubmitLogin();
             CurrentPage.As<ProductPage>().SelectProductCategory();
             CurrentPage.As<ProductPage>().SelectProduct();
-            CurrentPage=CurrentPage.As<ProductPage>().ClickAddToCart();
+            CurrentPage = CurrentPage.As<ProductPage>().ClickAddToCart();
             CurrentPage.As<CartPage>().SelectProceedToCheckout();
             CurrentPage.As<CartPage>().SelectSummaryProceedToCheckout();
-            CurrentPage=CurrentPage.As<CartPage>().SelectAddressProceedToCheckout();
+            CurrentPage = CurrentPage.As<CartPage>().SelectAddressProceedToCheckout();
             CurrentPage.As<ShipppingPage>().AgreeTermsAndContions();
-            CurrentPage=CurrentPage.As<ShipppingPage>().SelectProceedToCheckout();
+            CurrentPage = CurrentPage.As<ShipppingPage>().SelectProceedToCheckout();
         }
 
         [When(@"User makes the payment after filling all details")]

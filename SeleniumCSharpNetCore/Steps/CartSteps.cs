@@ -10,7 +10,7 @@ namespace SeleniumCSharpNetCore.Steps
             CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
             CurrentPage = CurrentPage.As<HomePage>().ClickSignIn();
             CurrentPage.As<LoginPage>().RegisterUserNameAndPassword();
-            CurrentPage=CurrentPage.As<LoginPage>().ClickSubmitLogin();
+            CurrentPage = CurrentPage.As<LoginPage>().ClickSubmitLogin();
         }
 
         [When(@"User adds a product to the cart")]
@@ -19,7 +19,7 @@ namespace SeleniumCSharpNetCore.Steps
             CurrentPage.As<ProductPage>().SelectProductCategory();
             CurrentPage.As<ProductPage>().SelectProduct();
             CurrentPage.As<ProductPage>().ViewProductDetail();
-            CurrentPage=CurrentPage.As<ProductPage>().ClickAddToCart();
+            CurrentPage = CurrentPage.As<ProductPage>().ClickAddToCart();
         }
 
         [Then(@"The cart should be updated")]
@@ -34,7 +34,7 @@ namespace SeleniumCSharpNetCore.Steps
         public void GivenUserHaveAddedFewProductsInTheCart()
         {
             CurrentPage = GetInstance<HomePage>();
-            CurrentPage=CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
+            CurrentPage = CurrentPage.As<HomePage>().OpenAutomationPracticeSite();
             CurrentPage.As<ProductPage>().SelectProductCategory();
             CurrentPage.As<ProductPage>().SelectProduct();
             CurrentPage = CurrentPage.As<ProductPage>().ClickAddToCart();
@@ -46,6 +46,5 @@ namespace SeleniumCSharpNetCore.Steps
 
         [Then(@"The cart should be empty")]
         public void ThenTheCartShouldBeEmpty() => CurrentPage.As<CartPage>().VerifyCardIsEmpty();
-
     }
 }

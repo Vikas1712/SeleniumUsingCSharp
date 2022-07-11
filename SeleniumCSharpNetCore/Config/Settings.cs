@@ -10,5 +10,6 @@
         public static string UserName { get; set; }
         public static string Password { get; set; }
         public static string IsLog { get; set; }
+        public static int DefaultWait { get; set; }
     }
 }
